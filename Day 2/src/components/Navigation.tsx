@@ -1,5 +1,5 @@
 import { User } from '../types';
-import { LogOut, BarChart3, FileText, History, LayoutDashboard, Lock } from 'lucide-react';
+import { LogOut, BarChart3, FileText, History, LayoutDashboard, Lock, Search } from 'lucide-react';
 
 interface NavigationProps {
   user: User;
@@ -40,6 +40,12 @@ export default function Navigation({
       label: 'Reports',
       icon: BarChart3,
       roles: ['admin', 'qa-manager', 'reviewer'],
+    },
+    {
+      id: 'apify',
+      label: 'Apify Search',
+      icon: Search,
+      roles: ['admin', 'qa-manager'],
     },
   ];
 

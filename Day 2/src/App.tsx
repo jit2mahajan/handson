@@ -6,9 +6,10 @@ import Dashboard from './pages/Dashboard';
 import RecordsManagement from './pages/RecordsManagement';
 import AuditTrail from './pages/AuditTrail';
 import Reports from './pages/Reports';
+import ApifySearch from './pages/ApifySearch';
 import Navigation from './components/Navigation';
 
-type Page = 'dashboard' | 'records' | 'audit' | 'reports';
+type Page = 'dashboard' | 'records' | 'audit' | 'reports' | 'apify';
 
 function App() {
   const [currentUser, setLocalUser] = useState<User | null>(null);
@@ -58,6 +59,7 @@ function App() {
         {currentPage === 'records' && <RecordsManagement user={currentUser} />}
         {currentPage === 'audit' && <AuditTrail user={currentUser} />}
         {currentPage === 'reports' && <Reports user={currentUser} />}
+        {currentPage === 'apify' && <ApifySearch />}
       </main>
     </div>
   );

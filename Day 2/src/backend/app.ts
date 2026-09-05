@@ -25,6 +25,7 @@ import {
 import rateLimitStatsRouter from './api/rateLimitStats';
 
 // Import Redis client
+import apifyRouter from './api/apify.js';
 import { redisClient, defaultRedisConfig } from './utils/redisClient';
 
 // Create Express app
@@ -252,6 +253,7 @@ app.post('/api/admin/users', authMiddleware, adminRateLimit, (_req: Request, res
  * Rate Limit Stats Routes (admin only)
  */
 app.use('/api/rate-limit', authMiddleware, rateLimitStatsRouter);
+app.use('/api/apify', apifyRouter);
 
 /**
  * Error handling middleware

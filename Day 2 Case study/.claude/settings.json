@@ -1,0 +1,49 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(npm run build*)",
+            "command": "rm -rf ./dist ./.next && find . -type d -name '.cache' -path '*/node_modules/*' -exec rm -rf {} + 2>/dev/null || true",
+            "statusMessage": "Cleaning build directory...",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Write(.env.production)|Edit(.env.production)",
+            "command": "grep -q 'DATABASE_HOST=localhost' .env.production || sed -i 's/DATABASE_HOST=.*/DATABASE_HOST=localhost/' .env.production && echo 'DATABASE_HOST updated to localhost'",
+            "statusMessage": "Ensuring DATABASE_HOST=localhost...",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[DEBUG] Command: $0 Args: $@' >> ~/.claude/debug.log",
+            "statusMessage": "Logging debug info...",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "DEBUG": "true",
+    "CLAUDE_DEBUG": "1"
+  }
+}
