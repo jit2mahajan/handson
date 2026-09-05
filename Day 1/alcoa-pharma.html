@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALCOA Compliance - Pharma Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3c72;
+            --primary-dark: #2a5298;
+            --primary-light: #eef2f8;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --info: #0284c7;
+            --bg-light: #f8fafc;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            animation: drift 12s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .header small {
+            opacity: 0.85;
+            font-size: 0.95em;
+            position: relative;
+            z-index: 1;
+            display: block;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .pharma-info-banner {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%);
+            border: 2px solid var(--border);
+            border-left: 5px solid var(--primary);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pharma-info-banner h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .pharma-info-banner p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f3f4f6 100%);
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-section h3 {
+            color: var(--primary);
+            margin-bottom: 28px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .form-section h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+            margin-right: 14px;
+            border-radius: 2px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+            margin-left: 2px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            background: white;
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.15);
+            background: #fafbfc;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3c72' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+            padding-right: 38px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+            font-family: inherit;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 26px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: height 0.3s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .principle-card:hover::before {
+            height: 8px;
+        }
+
+        .principle-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.25);
+        }
+
+        .principle-card h4 {
+            color: var(--primary);
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .principle-card p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .checklist-section {
+            margin-top: 50px;
+            border-top: 2px solid var(--border);
+            padding-top: 50px;
+        }
+
+        .checklist-section h2 {
+            color: var(--primary);
+            margin-bottom: 35px;
+            font-size: 2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checklist-section h2::before {
+            content: '';
+            width: 5px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .principle-group {
+            margin-bottom: 32px;
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .principle-group:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .principle-group h3 {
+            color: var(--primary);
+            margin-bottom: 22px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .principle-group h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+
+        .checklist-item {
+            background: white;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checklist-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--border);
+            transition: background 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            margin-right: 16px;
+            margin-top: 2px;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .checklist-item input[type="checkbox"]:hover {
+            transform: scale(1.1);
+        }
+
+        .checklist-item input[type="checkbox"]:checked ~ .item-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            accent-color: var(--success);
+        }
+
+        .item-label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.95em;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: color 0.2s ease;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f5f3ff 100%);
+            border: 2px solid var(--primary);
+            padding: 36px;
+            border-radius: 12px;
+            margin-top: 50px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .summary-section h3 {
+            color: var(--primary);
+            margin-bottom: 28px;
+            font-size: 1.4em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-section h3::before {
+            content: '';
+            width: 5px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .compliance-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .status-card {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .status-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .status-card strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-card .value {
+            font-size: 2em;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 28px 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            border: 1px solid #d1d5db;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.2);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 18px;
+            border: 2px solid;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .status-badge.compliant {
+            background: #d1fae5;
+            color: #065f46;
+            border-color: var(--success);
+        }
+
+        .status-badge.partial {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: var(--warning);
+        }
+
+        .status-badge.non-compliant {
+            background: #fee2e2;
+            color: #7f1d1d;
+            border-color: var(--danger);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 13px 26px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: 0;
+        }
+
+        button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-reset {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-reset:active {
+            transform: translateY(0);
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+        }
+
+        .btn-export:active {
+            transform: translateY(0);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(2, 136, 209, 0.35);
+        }
+
+        .btn-print:active {
+            transform: translateY(0);
+        }
+
+        .pharma-note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
+            border: 2px solid var(--warning);
+            border-left: 5px solid var(--warning);
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 24px;
+            font-size: 0.9em;
+            color: #78350f;
+            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1);
+        }
+
+        .pharma-note strong {
+            color: #d97706;
+            font-weight: 700;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .compliance-status {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .summary-section {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 30px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .principles-grid {
+                gap: 14px;
+            }
+
+            .checklist-section h2 {
+                font-size: 1.3em;
+            }
+
+            .compliance-status {
+                grid-template-columns: 1fr;
+            }
+
+            .principle-card {
+                padding: 18px;
+            }
+
+            .principle-group {
+                padding: 18px;
+            }
+
+            .summary-section {
+                padding: 18px;
+            }
+
+            button {
+                padding: 11px 20px;
+                font-size: 0.9em;
+            }
+
+            .form-section {
+                gap: 15px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .button-group {
+                display: none;
+            }
+
+            .form-section {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+
+            .principle-group {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+
+            .header {
+                background: white;
+                color: var(--text-primary);
+                border-bottom: 2px solid var(--border);
+            }
+
+            .header h1 {
+                color: var(--primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ALCOA+ Compliance Assessment</h1>
+            <p>Pharmaceutical Operations Data Integrity</p>
+            <small>21 CFR Part 11 | GxP Compliance | FDA Regulations</small>
+        </div>
+
+        <div class="content">
+            <!-- Pharma Info Banner -->
+            <div class="pharma-info-banner">
+                <h3>📋 Pharmaceutical Data Integrity Framework</h3>
+                <p>
+                    ALCOA+ (Attributable, Legible, Contemporaneous, Original, Accurate, and plus) ensures data integrity
+                    in pharmaceutical operations. This assessment tool aligns with FDA 21 CFR Part 11 and ICH GxP guidelines
+                    for electronic and paper-based records. Compliance is mandatory for all GMP, GLP, and GDP operations.
+                </p>
+            </div>
+
+            <!-- Pharma Operations Form -->
+            <div class="form-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0;">Facility & Operations Information</h3>
+                    <button class="btn-export" onclick="loadSampleData()" style="padding: 10px 20px; font-size: 0.9em;">📋 Load Sample Data</button>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="facility-name">Facility Name <span class="required">*</span></label>
+                        <input type="text" id="facility-name" placeholder="e.g., Manufacturing Plant A" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="site-code">Site Code <span class="required">*</span></label>
+                        <input type="text" id="site-code" placeholder="e.g., MFG-001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessment-date">Assessment Date <span class="required">*</span></label>
+                        <input type="date" id="assessment-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gxp-type">GxP Category <span class="required">*</span></label>
+                        <select id="gxp-type" required>
+                            <option value="">-- Select --</option>
+                            <option value="gmp">GMP (Good Manufacturing Practice)</option>
+                            <option value="glp">GLP (Good Laboratory Practice)</option>
+                            <option value="gdp">GDP (Good Distribution Practice)</option>
+                            <option value="gcp">GCP (Good Clinical Practice)</option>
+                            <option value="gvp">GVP (Good Vigilance Practice)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department/Area <span class="required">*</span></label>
+                        <select id="department" required>
+                            <option value="">-- Select --</option>
+                            <option value="qa">Quality Assurance</option>
+                            <option value="qc">Quality Control</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="production-planning">Production Planning</option>
+                            <option value="warehouse">Warehouse/Distribution</option>
+                            <option value="lab">Laboratory/R&D</option>
+                            <option value="regulatory">Regulatory Affairs</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessor-name">Assessor Name <span class="required">*</span></label>
+                        <input type="text" id="assessor-name" placeholder="Full name" required>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="batch-lot">Batch/Lot Number</label>
+                        <input type="text" id="batch-lot" placeholder="e.g., B2024-001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-name">Product Name</label>
+                        <input type="text" id="product-name" placeholder="Product name or code">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="system-name">System/Equipment ID</label>
+                        <input type="text" id="system-name" placeholder="e.g., LIMS-001, MES-01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="risk-level">Risk Level</label>
+                        <select id="risk-level">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical - Recall Risk</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audit-type">Audit Type</label>
+                        <select id="audit-type">
+                            <option value="routine">Routine Inspection</option>
+                            <option value="investigation">Investigation/Out of Spec</option>
+                            <option value="deviation">Deviation Assessment</option>
+                            <option value="capa">CAPA Follow-up</option>
+                            <option value="validation">System Validation</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inspector">Inspector/Auditor ID</label>
+                        <input type="text" id="inspector" placeholder="Employee ID or badge #">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="scope">Assessment Scope</label>
+                    <textarea id="scope" placeholder="Describe the records/systems being assessed..."></textarea>
+                </div>
+            </div>
+
+            <!-- ALCOA+ Principles Overview -->
+            <div class="form-section">
+                <h3>ALCOA+ Principles</h3>
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <div class="principle-letter">A</div>
+                        <h4>Attributable</h4>
+                        <p>Data traceable to the person who created/modified it with user IDs, timestamps, and audit trails</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-letter">L</div>
+                        <h4>Legible</h4>
+                        <p>Data is clear, readable, and understandable; properly formatted with no ambiguity</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-letter">C</div>
+                        <h4>Contemporaneous</h4>
+                        <p>Data recorded at the time an event occurs; no retroactive or backdated entries</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-letter">O</div>
+                        <h4>Original</h4>
+                        <p>Data maintained in original form without erasure; corrections traceable and signed</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-letter">A</div>
+                        <h4>Accurate</h4>
+                        <p>Data is correct, complete, and precise; verified and matches source documents</p>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-letter">+</div>
+                        <h4>Plus</h4>
+                        <p>Additional considerations: security, system validation, disaster recovery, and regulatory expectations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Checklist -->
+            <div class="checklist-section">
+                <h2>Data Integrity Compliance Checklist</h2>
+
+                <!-- Attributable -->
+                <div class="principle-group">
+                    <h3>Attributable (A) - User Accountability & Traceability</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All records include user ID/name of person creating or modifying data</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Unique user identification enforced (no shared logins or generic accounts)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Complete audit trail available showing all data entries and modifications</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Timestamps recorded for all changes (date and time)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Reason for modification/correction documented where applicable</span>
+                    </label>
+                </div>
+
+                <!-- Legible -->
+                <div class="principle-group">
+                    <h3>Legible (L) - Clarity & Readability</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All entries are clearly written and easily readable (no poor quality scans/prints)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Standardized formats and units used consistently throughout records</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No ambiguous abbreviations; only approved abbreviations used (per SOP)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Electronic records use appropriate fonts and formatting</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Metadata preserved for electronic records (file formats, creation info)</span>
+                    </label>
+                </div>
+
+                <!-- Contemporaneous -->
+                <div class="principle-group">
+                    <h3>Contemporaneous (C) - Timely Recording</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data recorded at the time the event occurs (real-time documentation)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No retroactive entries or backdated data (prior work documentation)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">System clocks synchronized and calibrated (NTP or validated time source)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Timestamps accurate to required precision (date/time zone documented)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Time zone information consistent; daylight saving changes managed</span>
+                    </label>
+                </div>
+
+                <!-- Original -->
+                <div class="principle-group">
+                    <h3>Original (O) - Data Integrity & Preservation</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No erasure, blanking, or white-out on original records</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Corrections made with single line through original (handwritten)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All corrections signed, dated, and reason documented</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Electronic records have change control with before/after values</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Original records preserved and accessible (not overwritten)</span>
+                    </label>
+                </div>
+
+                <!-- Accurate -->
+                <div class="principle-group">
+                    <h3>Accurate (A) - Data Correctness & Completeness</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data accuracy verified and validated against source documents</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All required fields completed; no missing or incomplete information</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data entries match specifications and acceptance criteria</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Calculated values verified (formulas correct, calculations reviewed)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Appropriate level of detail and precision for the data</span>
+                    </label>
+                </div>
+
+                <!-- Plus -->
+                <div class="principle-group">
+                    <h3>Plus (+) - Additional Requirements & Security</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">System access controls and user authentication implemented</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data encryption used for sensitive/electronic records (in transit & at rest)</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">System validated per 21 CFR Part 11 / IQ-OQ-PQ protocols</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Disaster recovery and backup procedures in place and tested</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Records retention policy meets regulatory requirements (archival/retention periods)</span>
+                    </label>
+                </div>
+
+                <!-- Summary Section -->
+                <div class="summary-section">
+                    <h3>Compliance Assessment Summary</h3>
+
+                    <div class="compliance-status">
+                        <div class="status-card">
+                            <strong>Total Items</strong>
+                            <div class="value" id="total-items">0</div>
+                        </div>
+                        <div class="status-card">
+                            <strong>Compliant</strong>
+                            <div class="value" id="compliant-items">0</div>
+                        </div>
+                        <div class="status-card">
+                            <strong>Non-Compliant</strong>
+                            <div class="value" id="non-compliant-items">0</div>
+                        </div>
+                        <div class="status-card">
+                            <strong>Compliance %</strong>
+                            <div class="value" id="compliance-percent">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill">0%</div>
+                    </div>
+
+                    <div id="status-text" style="font-size: 1.1em; font-weight: 600; color: #1e3c72;">Progress: 0 out of 0 items completed</div>
+
+                    <div class="pharma-note">
+                        <strong>⚠️ Important:</strong> This assessment must be documented, retained according to regulatory requirements (typically 3 years minimum), and reviewed by QA. Non-compliance findings must be addressed through a formal CAPA process.
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-export" onclick="exportPDF()">📄 Export to PDF</button>
+                        <button class="btn-export" onclick="exportCSV()">📊 Export to CSV</button>
+                        <button class="btn-print" onclick="window.print()">🖨️ Print Report</button>
+                        <button class="btn-reset" onclick="resetChecklist()">🔄 Reset Checklist</button>
+                        <button class="btn-reset" onclick="clearAllData()">🗑️ Clear All Data</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 30px;">
+                    <label for="notes">Assessment Notes & Findings</label>
+                    <textarea id="notes" placeholder="Document any non-conformances, observations, corrective actions required, or recommendations..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.check-item');
+        const principleNames = ['Attributable', 'Legible', 'Contemporaneous', 'Original', 'Accurate', 'Plus'];
+
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('assessment-date').value = today;
+        }
+
+        function updateProgress() {
+            const compliant = document.querySelectorAll('.check-item:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((compliant / total) * 100);
+
+            document.getElementById('total-items').textContent = total;
+            document.getElementById('compliant-items').textContent = compliant;
+            document.getElementById('non-compliant-items').textContent = total - compliant;
+            document.getElementById('compliance-percent').textContent = percentage + '%';
+
+            document.getElementById('status-text').textContent =
+                `Compliance Status: ${percentage}% - ${compliant} of ${total} items verified`;
+
+            const progressFill = document.getElementById('progress-fill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+
+            updateComplianceBadge(percentage);
+        }
+
+        function updateComplianceBadge(percentage) {
+            const existingBadge = document.querySelector('.status-badge');
+            if (existingBadge) existingBadge.remove();
+
+            let statusText = '';
+            let statusClass = '';
+
+            if (percentage === 100) {
+                statusText = '✓ FULLY COMPLIANT';
+                statusClass = 'compliant';
+            } else if (percentage >= 80) {
+                statusText = '⚠ MOSTLY COMPLIANT';
+                statusClass = 'partial';
+            } else if (percentage >= 50) {
+                statusText = '! PARTIALLY COMPLIANT';
+                statusClass = 'partial';
+            } else {
+                statusText = '✗ NON-COMPLIANT - CAPA REQUIRED';
+                statusClass = 'non-compliant';
+            }
+
+            const badge = document.createElement('span');
+            badge.className = `status-badge ${statusClass}`;
+            badge.textContent = statusText;
+
+            const statusText_elem = document.getElementById('status-text');
+            statusText_elem.parentNode.insertBefore(badge, statusText_elem.nextSibling);
+        }
+
+        function resetChecklist() {
+            if (confirm('Are you sure you want to reset all items? This cannot be undone.')) {
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+                updateProgress();
+            }
+        }
+
+        function exportPDF() {
+            const facility = document.getElementById('facility-name').value || 'Not specified';
+            const assessor = document.getElementById('assessor-name').value || 'Not specified';
+            const date = document.getElementById('assessment-date').value;
+
+            alert('PDF export feature coming soon. For now, use Print to save as PDF (Ctrl+P or Cmd+P).');
+        }
+
+        function exportCSV() {
+            const facility = document.getElementById('facility-name').value || 'Not specified';
+            const siteCode = document.getElementById('site-code').value || 'Not specified';
+            const gxpType = document.getElementById('gxp-type').value || 'Not specified';
+            const department = document.getElementById('department').value || 'Not specified';
+            const assessor = document.getElementById('assessor-name').value || 'Not specified';
+            const date = document.getElementById('assessment-date').value;
+            const notes = document.getElementById('notes').value;
+
+            const compliant = document.querySelectorAll('.check-item:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((compliant / total) * 100);
+
+            let csv = 'ALCOA+ COMPLIANCE ASSESSMENT EXPORT\n';
+            csv += `Facility,${facility}\n`;
+            csv += `Site Code,${siteCode}\n`;
+            csv += `GxP Category,${gxpType}\n`;
+            csv += `Department,${department}\n`;
+            csv += `Assessor,${assessor}\n`;
+            csv += `Assessment Date,${date}\n`;
+            csv += `Overall Compliance,${percentage}%\n`;
+            csv += `Items Verified,${compliant}/${total}\n\n`;
+
+            csv += 'PRINCIPLE,REQUIREMENT,STATUS\n';
+            const groups = document.querySelectorAll('.principle-group');
+            groups.forEach((group, index) => {
+                const groupCheckboxes = group.querySelectorAll('.check-item');
+                const labels = group.querySelectorAll('.item-label');
+                labels.forEach((label, i) => {
+                    const isChecked = groupCheckboxes[i].checked ? 'COMPLIANT' : 'NON-COMPLIANT';
+                    csv += `"${principleNames[index]}","${label.textContent.trim()}","${isChecked}"\n`;
+                });
+            });
+
+            csv += `\nNOTES\n"${notes.replace(/"/g, '""')}"\n`;
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ALCOA_Assessment_${date || new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        // Enhanced progress tracking
+        function saveProgressToLocalStorage() {
+            const state = {
+                timestamp: new Date().toISOString(),
+                progress: document.querySelectorAll('.check-item:checked').length,
+                total: checkboxes.length,
+                checkedItems: Array.from(checkboxes).map(cb => cb.checked),
+                formData: {
+                    facilityName: document.getElementById('facility-name').value,
+                    siteCode: document.getElementById('site-code').value,
+                    assessmentDate: document.getElementById('assessment-date').value,
+                    gxpType: document.getElementById('gxp-type').value,
+                    department: document.getElementById('department').value,
+                    assessorName: document.getElementById('assessor-name').value,
+                    notes: document.getElementById('notes').value
+                }
+            };
+            localStorage.setItem('alcoa-pharma-state', JSON.stringify(state));
+        }
+
+        function loadProgressFromLocalStorage() {
+            const saved = localStorage.getItem('alcoa-pharma-state');
+            if (saved) {
+                try {
+                    const state = JSON.parse(saved);
+                    const hoursSince = (new Date() - new Date(state.timestamp)) / (1000 * 60 * 60);
+
+                    if (hoursSince < 24) {
+                        state.checkedItems.forEach((checked, index) => {
+                            if (checkboxes[index]) {
+                                checkboxes[index].checked = checked;
+                            }
+                        });
+
+                        if (state.formData.facilityName) document.getElementById('facility-name').value = state.formData.facilityName;
+                        if (state.formData.siteCode) document.getElementById('site-code').value = state.formData.siteCode;
+                        if (state.formData.gxpType) document.getElementById('gxp-type').value = state.formData.gxpType;
+                        if (state.formData.department) document.getElementById('department').value = state.formData.department;
+                        if (state.formData.assessorName) document.getElementById('assessor-name').value = state.formData.assessorName;
+                        if (state.formData.notes) document.getElementById('notes').value = state.formData.notes;
+
+                        updateProgress();
+                    }
+                } catch (e) {
+                    console.log('Could not restore previous state');
+                }
+            }
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateProgress();
+                saveProgressToLocalStorage();
+            });
+        });
+
+        // Save form data periodically
+        document.getElementById('facility-name').addEventListener('blur', saveProgressToLocalStorage);
+        document.getElementById('site-code').addEventListener('blur', saveProgressToLocalStorage);
+        document.getElementById('gxp-type').addEventListener('change', saveProgressToLocalStorage);
+        document.getElementById('department').addEventListener('change', saveProgressToLocalStorage);
+        document.getElementById('assessor-name').addEventListener('blur', saveProgressToLocalStorage);
+        document.getElementById('notes').addEventListener('blur', saveProgressToLocalStorage);
+
+        // Sample Data Sets for Testing
+        const sampleDataSets = [
+            {
+                name: 'Manufacturing - Batch Record',
+                data: {
+                    'facility-name': 'Pharmatech Manufacturing Plant - Building A',
+                    'site-code': 'MFG-001',
+                    'gxp-type': 'gmp',
+                    'department': 'manufacturing',
+                    'assessor-name': 'Dr. Sarah Johnson',
+                    'batch-lot': 'B2024-001456',
+                    'product-name': 'Amoxicillin 500mg Tablet',
+                    'system-name': 'MES-Manufacturing-01',
+                    'risk-level': 'high',
+                    'audit-type': 'routine',
+                    'inspector': 'EMP-0847',
+                    'scope': 'Batch production record for lot B2024-001456 including raw materials, in-process testing, and finished product release documentation'
+                }
+            },
+            {
+                name: 'Quality Control - Lab Records',
+                data: {
+                    'facility-name': 'Pharmatech QC Laboratory',
+                    'site-code': 'LAB-001',
+                    'gxp-type': 'glp',
+                    'department': 'qc',
+                    'assessor-name': 'James Martinez',
+                    'batch-lot': 'QC-2024-0789',
+                    'product-name': 'Ibuprofen 200mg Caplet',
+                    'system-name': 'LIMS-QC-System-02',
+                    'risk-level': 'medium',
+                    'audit-type': 'investigation',
+                    'inspector': 'EMP-0923',
+                    'scope': 'Laboratory test records including HPLC analysis, dissolution testing, and content uniformity for batch B2024-001200'
+                }
+            },
+            {
+                name: 'Quality Assurance - Deviation',
+                data: {
+                    'facility-name': 'Pharmatech Corporate QA',
+                    'site-code': 'QA-001',
+                    'gxp-type': 'gmp',
+                    'department': 'qa',
+                    'assessor-name': 'Elizabeth Chen',
+                    'batch-lot': 'DEV-2024-00342',
+                    'product-name': 'Aspirin 75mg Tablet',
+                    'system-name': 'ERP-SAP-QMS',
+                    'risk-level': 'critical',
+                    'audit-type': 'deviation',
+                    'inspector': 'EMP-0512',
+                    'scope': 'Out-of-specification result deviation investigation including root cause analysis and corrective action plan'
+                }
+            },
+            {
+                name: 'Distribution - Warehouse Records',
+                data: {
+                    'facility-name': 'Pharmatech Distribution Center',
+                    'site-code': 'DIST-001',
+                    'gxp-type': 'gdp',
+                    'department': 'warehouse',
+                    'assessor-name': 'Michael Thompson',
+                    'batch-lot': 'LOT-2024-05634',
+                    'product-name': 'Omeprazole 20mg Capsule',
+                    'system-name': 'WMS-Warehouse-System',
+                    'risk-level': 'medium',
+                    'audit-type': 'routine',
+                    'inspector': 'EMP-0645',
+                    'scope': 'Storage and distribution records including temperature monitoring, shelf life tracking, and shipment documentation'
+                }
+            },
+            {
+                name: 'Regulatory - System Validation',
+                data: {
+                    'facility-name': 'Pharmatech IT Systems',
+                    'site-code': 'IT-001',
+                    'gxp-type': 'gmp',
+                    'department': 'qa',
+                    'assessor-name': 'Dr. Robert Wilson',
+                    'batch-lot': 'VAL-2024-001',
+                    'product-name': 'Electronic Record System',
+                    'system-name': 'LIMS-ERP-Integration-v3.2',
+                    'risk-level': 'critical',
+                    'audit-type': 'validation',
+                    'inspector': 'EMP-0158',
+                    'scope': '21 CFR Part 11 compliance validation for electronic batch record system including security, audit trails, and data integrity'
+                }
+            },
+            {
+                name: 'R&D - CAPA Follow-up',
+                data: {
+                    'facility-name': 'Pharmatech Research & Development',
+                    'site-code': 'RD-001',
+                    'gxp-type': 'glp',
+                    'department': 'lab',
+                    'assessor-name': 'Dr. Patricia Brown',
+                    'batch-lot': 'CAPA-2024-156',
+                    'product-name': 'Experimental Compound XYZ-001',
+                    'system-name': 'LIMS-Research-Lab',
+                    'risk-level': 'high',
+                    'audit-type': 'capa',
+                    'inspector': 'EMP-0201',
+                    'scope': 'Follow-up assessment of CAPA effectiveness for data recording deficiencies identified in previous audit'
+                }
+            }
+        ];
+
+        function loadSampleData() {
+            // Select random sample data set
+            const randomSet = sampleDataSets[Math.floor(Math.random() * sampleDataSets.length)];
+
+            // Populate form fields
+            Object.keys(randomSet.data).forEach(fieldId => {
+                const element = document.getElementById(fieldId);
+                if (element) {
+                    element.value = randomSet.data[fieldId];
+                }
+            });
+
+            // Add sample notes
+            const notesField = document.getElementById('notes');
+            const sampleNotes = [
+                'Assessment conducted per schedule. All records appear to be in compliance with ALCOA+ principles. No observations at this time.',
+                'Minor observation: One entry lacks assessor signature. Corrected during assessment. Recommend refresher training on documentation requirements.',
+                'Critical finding: Retroactive entries detected in batch record dated 3 days after event. Immediate CAPA initiated. System access review recommended.',
+                'Compliance assessment completed. Records properly maintained with appropriate audit trails. System performing as validated.',
+                'Investigation of OOS result reveals adequate documentation and root cause analysis. CAPA implementation on schedule.',
+                'System validation records complete and properly maintained. 21 CFR Part 11 compliance verified. Ready for regulatory submission.'
+            ];
+            notesField.value = sampleNotes[Math.floor(Math.random() * sampleNotes.length)];
+
+            // Auto-check some random items to simulate real assessment
+            const randomCompliantItems = Math.floor(Math.random() * (checkboxes.length - 10)) + 15;
+            checkboxes.forEach((checkbox, index) => {
+                if (index < randomCompliantItems) {
+                    checkbox.checked = true;
+                }
+            });
+
+            updateProgress();
+
+            // Show notification
+            alert(`✓ Sample data loaded: "${randomSet.name}"\n\nReview the populated fields and adjust as needed for your assessment.`);
+        }
+
+        function clearAllData() {
+            if (confirm('Clear all data? This cannot be undone.')) {
+                document.getElementById('facility-name').value = '';
+                document.getElementById('site-code').value = '';
+                document.getElementById('assessment-date').value = new Date().toISOString().split('T')[0];
+                document.getElementById('gxp-type').value = '';
+                document.getElementById('department').value = '';
+                document.getElementById('assessor-name').value = '';
+                document.getElementById('batch-lot').value = '';
+                document.getElementById('product-name').value = '';
+                document.getElementById('system-name').value = '';
+                document.getElementById('risk-level').value = 'medium';
+                document.getElementById('audit-type').value = 'routine';
+                document.getElementById('inspector').value = '';
+                document.getElementById('scope').value = '';
+                document.getElementById('notes').value = '';
+
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+                updateProgress();
+            }
+        }
+
+        // Initialize
+        setDefaultDate();
+        loadProgressFromLocalStorage();
+        updateProgress();
+    </script>
+</body>
+</html>

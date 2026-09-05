@@ -1,0 +1,186 @@
+{
+  "app": {
+    "name": "ALCOA+ QA Management System",
+    "version": "1.0.0",
+    "description": "Professional pharmaceutical quality assurance platform for Eli Lilly",
+    "environment": "development",
+    "port": 3000,
+    "host": "localhost"
+  },
+  "compliance": {
+    "alcoa_enforcement": true,
+    "audit_trail_immutable": true,
+    "require_all_alcoa_flags": true,
+    "cfr_part_11_mode": true,
+    "user_attribution_required": true,
+    "timestamp_precision": "milliseconds"
+  },
+  "ui": {
+    "theme": "light",
+    "brand_colors": {
+      "primary": "#003366",
+      "accent": "#FFB81C",
+      "light": "#E8EEF7"
+    },
+    "responsive": {
+      "mobile_min": "320px",
+      "tablet_min": "768px",
+      "desktop_min": "1024px"
+    }
+  },
+  "roles": [
+    {
+      "name": "admin",
+      "permissions": ["create", "read", "update", "delete", "approve", "reports", "audit"]
+    },
+    {
+      "name": "qa-manager",
+      "permissions": ["create", "read", "update", "approve", "reports", "audit"]
+    },
+    {
+      "name": "qa-analyst",
+      "permissions": ["create", "read", "update"]
+    },
+    {
+      "name": "reviewer",
+      "permissions": ["read", "audit", "reports"]
+    }
+  ],
+  "record_types": {
+    "test-result": {
+      "icon": "CheckCircle2",
+      "color": "blue",
+      "requires_approval": true
+    },
+    "deviation": {
+      "icon": "AlertCircle",
+      "color": "red",
+      "requires_approval": true
+    },
+    "documentation": {
+      "icon": "FileText",
+      "color": "green",
+      "requires_approval": false
+    },
+    "audit": {
+      "icon": "History",
+      "color": "purple",
+      "requires_approval": false
+    }
+  },
+  "priority_levels": ["low", "medium", "high", "critical"],
+  "status_states": ["draft", "pending-review", "approved", "rejected"],
+  "hooks": {
+    "react_hooks": {
+      "useState": {
+        "description": "Manage component local state",
+        "used_in": ["LoginPage", "Dashboard", "RecordsManagement", "Reports", "RecordModal"],
+        "common_uses": ["forms", "modals", "filters", "selections"],
+        "enabled": true
+      },
+      "useEffect": {
+        "description": "Handle side effects and lifecycle",
+        "used_in": ["App"],
+        "purpose": "Initialize storage, restore user session",
+        "dependency_array": "[]",
+        "enabled": true
+      },
+      "useMemo": {
+        "description": "Memoize expensive calculations",
+        "used_in": ["Dashboard", "RecordsManagement", "AuditTrail", "Reports"],
+        "prevents": "unnecessary filtering and sorting on every render",
+        "enabled": true
+      },
+      "useContext": {
+        "description": "Share state across components",
+        "used_in": "NOT_USED",
+        "reason": "Using localStorage instead for demo",
+        "enabled": false
+      },
+      "useReducer": {
+        "description": "Complex state management",
+        "used_in": "NOT_USED",
+        "reason": "Simple local state sufficient",
+        "enabled": false
+      }
+    },
+    "git_hooks": {
+      "pre-commit": {
+        "description": "Run before commit",
+        "commands": ["npm run build", "git add dist/"],
+        "enabled": false
+      },
+      "post-checkout": {
+        "description": "Run after checkout",
+        "commands": ["npm install"],
+        "enabled": false
+      }
+    },
+    "build_hooks": {
+      "predev": {
+        "description": "Before dev server starts",
+        "commands": [],
+        "enabled": false
+      },
+      "prebuild": {
+        "description": "Before production build",
+        "commands": ["npm run type-check"],
+        "enabled": false
+      },
+      "postbuild": {
+        "description": "After production build",
+        "commands": ["npm run analyze"],
+        "enabled": false
+      }
+    }
+  },
+  "localStorage_keys": {
+    "user": "alcoa_current_user",
+    "records": "alcoa_records",
+    "audit_trail": "alcoa_audit_trail",
+    "users": "alcoa_users",
+    "session_timeout": 3600000
+  },
+  "api_endpoints": {
+    "base_url": "http://localhost:5000/api",
+    "endpoints": {
+      "auth": "/auth",
+      "records": "/records",
+      "audit": "/audit",
+      "reports": "/reports",
+      "users": "/users"
+    },
+    "enabled": false,
+    "note": "For future backend integration"
+  },
+  "dev_settings": {
+    "mock_data_enabled": true,
+    "debug_mode": false,
+    "console_logs": true,
+    "performance_monitoring": false,
+    "redux_devtools": false
+  },
+  "production_settings": {
+    "error_reporting": true,
+    "analytics_enabled": false,
+    "source_maps": false,
+    "minify": true,
+    "cache_assets": true
+  },
+  "validation": {
+    "require_email": true,
+    "require_title": true,
+    "require_description": true,
+    "max_record_size": "10MB",
+    "password_min_length": 8
+  },
+  "paths": {
+    "src": "./src",
+    "public": "./public",
+    "dist": "./dist",
+    "pages": "./src/pages",
+    "components": "./src/components",
+    "types": "./src/types",
+    "utils": "./src/utils"
+  }
+}

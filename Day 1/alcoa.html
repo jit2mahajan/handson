@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALCOA Principles - Data Quality Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --primary-light: #f0f4ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --bg-light: #f9fafb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 45px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #fafbfc 100%);
+            border: 2px solid var(--border);
+            border-left: 5px solid var(--primary);
+            padding: 28px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: right 0.5s ease;
+        }
+
+        .principle-card:hover::before {
+            right: 100%;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .principle-card h3 {
+            color: var(--primary);
+            font-size: 1.25em;
+            margin-bottom: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .principle-card .letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2em;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .principle-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-size: 0.95em;
+        }
+
+        .principle-card .details {
+            background: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            line-height: 1.8;
+        }
+
+        .assessment-section {
+            margin-top: 50px;
+            border-top: 2px solid var(--border);
+            padding-top: 50px;
+        }
+
+        .assessment-section h2 {
+            color: var(--primary);
+            margin-bottom: 35px;
+            font-size: 2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .assessment-section h2::before {
+            content: '';
+            width: 4px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .checklist-item {
+            background: white;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checklist-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--border);
+            transition: background 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            margin-right: 16px;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .checklist-item input[type="checkbox"]:hover {
+            transform: scale(1.1);
+        }
+
+        .checklist-item input[type="checkbox"]:checked ~ .item-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            accent-color: var(--success);
+        }
+
+        .item-label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.95em;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        .principle-group {
+            margin-bottom: 35px;
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .principle-group:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .principle-group h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.25em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .principle-group h3::before {
+            content: '';
+            width: 3px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%);
+            border-left: 5px solid var(--primary);
+            border: 2px solid var(--border);
+            border-left: 5px solid var(--primary);
+            padding: 32px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .summary h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .summary p {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 16px;
+            font-size: 1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 36px;
+            background: var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            margin-top: 16px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            border: 1px solid #d1d5db;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85em;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        button:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-reset {
+            background: #6b7280;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-reset:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-reset:active {
+            transform: translateY(0);
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+        }
+
+        .btn-export:active {
+            transform: translateY(0);
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f3f4f6 100%);
+            padding: 28px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: var(--text-primary);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            background: #fafbfc;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+            padding-right: 38px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+            font-family: inherit;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85em;
+            margin-top: 12px;
+            border: 2px solid transparent;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .status-badge.compliant {
+            background: #d1fae5;
+            color: #065f46;
+            border-color: var(--success);
+        }
+
+        .status-badge.non-compliant {
+            background: #fee2e2;
+            color: #7f1d1d;
+            border-color: var(--danger);
+        }
+
+        .status-badge.partial {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: var(--warning);
+        }
+
+        .operations-panel {
+            background: linear-gradient(135deg, #f0f9ff 0%, #f3e8ff 100%);
+            border-left: 5px solid var(--primary);
+            border: 2px solid var(--border);
+            border-left: 5px solid var(--primary);
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .operations-panel h4 {
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .assessment-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 14px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            transition: all 0.2s ease;
+        }
+
+        .info-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.8em;
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item span {
+            color: var(--text-primary);
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 35px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .form-section {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .assessment-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .assessment-section h2 {
+                font-size: 1.4em;
+            }
+
+            .principle-card {
+                padding: 20px;
+            }
+
+            .summary {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ALCOA Principles</h1>
+            <p>Data Quality Framework for Compliance and Integrity</p>
+        </div>
+
+        <div class="content">
+            <!-- Principles Overview -->
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3><span class="letter">A</span>Attributable</h3>
+                    <p>Data can be traced to the person who created or modified it.</p>
+                    <div class="details">
+                        ✓ User identification tracked<br>
+                        ✓ Timestamps recorded<br>
+                        ✓ Audit trail available
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <h3><span class="letter">L</span>Legible</h3>
+                    <p>Data is clear, readable, and understandable.</p>
+                    <div class="details">
+                        ✓ Clear handwriting or printing<br>
+                        ✓ Proper formatting<br>
+                        ✓ No ambiguous abbreviations
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <h3><span class="letter">C</span>Contemporaneous</h3>
+                    <p>Data is recorded at the time an event occurs.</p>
+                    <div class="details">
+                        ✓ Real-time documentation<br>
+                        ✓ No retroactive entries<br>
+                        ✓ Immediate recording
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <h3><span class="letter">O</span>Original</h3>
+                    <p>Data is recorded in its original form without alteration.</p>
+                    <div class="details">
+                        ✓ No blanking or erasure<br>
+                        ✓ Single line through errors<br>
+                        ✓ Traceable corrections
+                    </div>
+                </div>
+
+                <div class="principle-card">
+                    <h3><span class="letter">A</span>Accurate</h3>
+                    <p>Data is correct, complete, and precise.</p>
+                    <div class="details">
+                        ✓ Verified for accuracy<br>
+                        ✓ Complete information<br>
+                        ✓ Appropriate detail level
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assessment Section -->
+            <div class="assessment-section">
+                <h2>ALCOA Compliance Checklist</h2>
+
+                <!-- Operations Team Form -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="team-select">Operations Team</label>
+                        <select id="team-select">
+                            <option value="">-- Select Team --</option>
+                            <option value="qa">Quality Assurance</option>
+                            <option value="data">Data Management</option>
+                            <option value="lab">Laboratory</option>
+                            <option value="production">Production</option>
+                            <option value="compliance">Compliance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="operator-name">Operator/Analyst Name</label>
+                        <input type="text" id="operator-name" placeholder="Enter name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessment-date">Assessment Date</label>
+                        <input type="date" id="assessment-date" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="record-id">Record/Document ID</label>
+                        <input type="text" id="record-id" placeholder="Enter ID">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority Level</label>
+                        <select id="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filter-principle">Filter by Principle</label>
+                        <select id="filter-principle">
+                            <option value="">Show All</option>
+                            <option value="attributable">Attributable</option>
+                            <option value="legible">Legible</option>
+                            <option value="contemporaneous">Contemporaneous</option>
+                            <option value="original">Original</option>
+                            <option value="accurate">Accurate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" placeholder="Add any relevant notes or observations..."></textarea>
+                </div>
+
+                <div class="principle-group">
+                    <h3>Attributable (A)</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">User identification is clearly recorded</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Date and time of data entry are documented</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Audit trail shows all changes and modifications</span>
+                    </label>
+                </div>
+
+                <div class="principle-group">
+                    <h3>Legible (L)</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All entries are clearly written and readable</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No ambiguous abbreviations or codes are used</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data format is consistent throughout</span>
+                    </label>
+                </div>
+
+                <div class="principle-group">
+                    <h3>Contemporaneous (C)</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data is recorded at the time of the event</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No backdated or retroactive entries exist</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Timestamps are accurate and synchronized</span>
+                    </label>
+                </div>
+
+                <div class="principle-group">
+                    <h3>Original (O)</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">No data erasure, blanking, or white-out exists</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Corrections are made with single line through original</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All corrections are signed and dated</span>
+                    </label>
+                </div>
+
+                <div class="principle-group">
+                    <h3>Accurate (A)</h3>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data has been verified for accuracy</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">All required information is complete</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-item">
+                        <span class="item-label">Data matches source documents</span>
+                    </label>
+                </div>
+
+                <!-- Summary -->
+                <div class="summary">
+                    <h3>Compliance Status</h3>
+                    <p id="status-text">Progress: 0 out of 15 items completed</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill">0%</div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-reset" onclick="resetChecklist()">Reset Checklist</button>
+                        <button class="btn-export" onclick="exportResults()">Export Results</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.check-item');
+        const principles = ['Attributable', 'Legible', 'Contemporaneous', 'Original', 'Accurate'];
+        const principleKeys = ['attributable', 'legible', 'contemporaneous', 'original', 'accurate'];
+
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('assessment-date').value = today;
+        }
+
+        function updateProgress() {
+            const checked = document.querySelectorAll('.check-item:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((checked / total) * 100);
+
+            // Update status text with smooth animation
+            const statusText = document.getElementById('status-text');
+            statusText.classList.add('fade-in');
+            statusText.textContent = `Progress: ${checked} out of ${total} items completed`;
+
+            const progressFill = document.getElementById('progress-fill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+
+            updateComplianceStatus();
+            saveProgressToLocalStorage();
+        }
+
+        function updateComplianceStatus() {
+            const checked = document.querySelectorAll('.check-item:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((checked / total) * 100);
+
+            let statusText = '';
+            let statusClass = '';
+            let icon = '';
+
+            if (percentage === 100) {
+                statusText = 'FULLY COMPLIANT';
+                statusClass = 'compliant';
+                icon = '✓';
+            } else if (percentage >= 80) {
+                statusText = 'MOSTLY COMPLIANT';
+                statusClass = 'partial';
+                icon = '⚠';
+            } else if (percentage >= 50) {
+                statusText = 'PARTIALLY COMPLIANT';
+                statusClass = 'partial';
+                icon = '!';
+            } else {
+                statusText = 'NON-COMPLIANT';
+                statusClass = 'non-compliant';
+                icon = '✗';
+            }
+
+            const existingBadge = document.querySelector('.status-badge');
+            if (existingBadge) existingBadge.remove();
+
+            const badge = document.createElement('span');
+            badge.className = `status-badge ${statusClass}`;
+            badge.innerHTML = `<span>${icon}</span><span>${statusText}</span>`;
+            document.getElementById('status-text').appendChild(badge);
+        }
+
+        function filterByPrinciple(principleKey) {
+            const groups = document.querySelectorAll('.principle-group');
+            groups.forEach((group, index) => {
+                if (principleKey === '' || principleKeys[index] === principleKey) {
+                    group.style.display = 'block';
+                    group.classList.add('fade-in');
+                } else {
+                    group.style.display = 'none';
+                }
+            });
+        }
+
+        function resetChecklist() {
+            if (confirm('Reset all items? This will clear all checked items.')) {
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+                updateProgress();
+            }
+        }
+
+        function exportResults() {
+            const checked = document.querySelectorAll('.check-item:checked').length;
+            const total = checkboxes.length;
+            const percentage = Math.round((checked / total) * 100);
+
+            const team = document.getElementById('team-select').value;
+            const operator = document.getElementById('operator-name').value;
+            const date = document.getElementById('assessment-date').value;
+            const recordId = document.getElementById('record-id').value;
+            const priority = document.getElementById('priority').value;
+            const notes = document.getElementById('notes').value;
+
+            let report = '╔════════════════════════════════════════════════════╗\n';
+            report += '║   ALCOA COMPLIANCE ASSESSMENT REPORT               ║\n';
+            report += '╚════════════════════════════════════════════════════╝\n\n';
+            report += `Generated: ${new Date().toLocaleString()}\n`;
+            report += `Assessment Date: ${date}\n\n`;
+
+            report += '─── OPERATIONS INFORMATION ───\n';
+            report += `Team: ${team || 'Not specified'}\n`;
+            report += `Operator: ${operator || 'Not specified'}\n`;
+            report += `Record ID: ${recordId || 'Not specified'}\n`;
+            report += `Priority: ${priority}\n\n`;
+
+            report += '─── COMPLIANCE SUMMARY ───\n';
+            report += `Overall Compliance: ${percentage}% (${checked}/${total} items)\n\n`;
+
+            const groups = document.querySelectorAll('.principle-group');
+
+            groups.forEach((group, index) => {
+                const groupCheckboxes = group.querySelectorAll('.check-item');
+                const groupChecked = group.querySelectorAll('.check-item:checked').length;
+                const groupPercentage = Math.round((groupChecked / groupCheckboxes.length) * 100);
+                report += `${principles[index]}: ${groupPercentage}% (${groupChecked}/${groupCheckboxes.length})\n`;
+
+                const labels = group.querySelectorAll('.item-label');
+                labels.forEach((label, i) => {
+                    const isChecked = groupCheckboxes[i].checked ? '✓' : '✗';
+                    report += `  ${isChecked} ${label.textContent}\n`;
+                });
+                report += '\n';
+            });
+
+            if (notes) {
+                report += '─── NOTES ───\n';
+                report += `${notes}\n\n`;
+            }
+
+            report += '═══════════════════════════════════════════════════════\n';
+            report += 'END OF REPORT\n';
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const fileName = `ALCOA_Assessment_${date || new Date().toISOString().split('T')[0]}.txt`;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function saveProgressToLocalStorage() {
+            const state = {
+                timestamp: new Date().toISOString(),
+                progress: document.querySelectorAll('.check-item:checked').length,
+                total: checkboxes.length,
+                checkedItems: Array.from(checkboxes).map(cb => cb.checked),
+                formData: {
+                    team: document.getElementById('team-select').value,
+                    operator: document.getElementById('operator-name').value,
+                    date: document.getElementById('assessment-date').value,
+                    recordId: document.getElementById('record-id').value,
+                    priority: document.getElementById('priority').value,
+                    notes: document.getElementById('notes').value
+                }
+            };
+            localStorage.setItem('alcoa-assessment-state', JSON.stringify(state));
+        }
+
+        function loadProgressFromLocalStorage() {
+            const saved = localStorage.getItem('alcoa-assessment-state');
+            if (saved) {
+                try {
+                    const state = JSON.parse(saved);
+                    const hoursSince = (new Date() - new Date(state.timestamp)) / (1000 * 60 * 60);
+
+                    if (hoursSince < 24) {
+                        state.checkedItems.forEach((checked, index) => {
+                            if (checkboxes[index]) {
+                                checkboxes[index].checked = checked;
+                            }
+                        });
+
+                        if (state.formData.team) document.getElementById('team-select').value = state.formData.team;
+                        if (state.formData.operator) document.getElementById('operator-name').value = state.formData.operator;
+                        if (state.formData.recordId) document.getElementById('record-id').value = state.formData.recordId;
+                        if (state.formData.priority) document.getElementById('priority').value = state.formData.priority;
+                        if (state.formData.notes) document.getElementById('notes').value = state.formData.notes;
+
+                        updateProgress();
+                    }
+                } catch (e) {
+                    console.log('Could not restore previous state');
+                }
+            }
+        }
+
+        // Event Listeners
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        document.getElementById('filter-principle').addEventListener('change', (e) => {
+            filterByPrinciple(e.target.value);
+        });
+
+        document.getElementById('team-select').addEventListener('change', saveProgressToLocalStorage);
+        document.getElementById('operator-name').addEventListener('blur', saveProgressToLocalStorage);
+        document.getElementById('assessment-date').addEventListener('change', saveProgressToLocalStorage);
+        document.getElementById('record-id').addEventListener('blur', saveProgressToLocalStorage);
+        document.getElementById('priority').addEventListener('change', saveProgressToLocalStorage);
+        document.getElementById('notes').addEventListener('blur', saveProgressToLocalStorage);
+
+        // Initialize
+        setDefaultDate();
+        loadProgressFromLocalStorage();
+        updateProgress();
+    </script>
+</body>
+</html>

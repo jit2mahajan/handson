@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '{print $5 \" bytes\"}')",
+      "Bash(mkdir -p \"/home/labuser/Downloads/Day 2/.claude/skills\" && echo \"✅ Skills directory created\")",
+      "Bash(cat)"
+    ],
+    "additionalDirectories": [
+      "/home/labuser/Downloads/Day 2/.claude"
+    ]
+  }
+}

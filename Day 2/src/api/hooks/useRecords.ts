@@ -1,0 +1,149 @@
+/**
+ * useRecords Hook - React hook for record management
+ * Provides async/await record operations with error handling and cleanup
+ */
+
+import { useState, useCallback, useEffect } from 'react';
+import { QARecord } from '@/types';
+import * as recordsService from '../services/recordsService';
+
+interface UseRecordsState {
+  records: QARecord[];
+  loading: boolean;
+  error: string | null;
+}
+
+interface UseRecordsActions {
+  fetchRecords: (filters?: any) => Promise<void>;
+  getRecord: (id: string) => Promise<QARecord | null>;
+  createRecord: (data: any) => Promise<QARecord>;
+  updateRecord: (id: string, data: any) => Promise<QARecord>;
+  deleteRecord: (id: string) => Promise<void>;
+  approveRecord: (id: string) => Promise<QARecord>;
+  rejectRecord: (id: string, reason?: string) => Promise<QARecord>;
+  clearError: () => void;
+}
+
+export function useRecords(): UseRecordsState & UseRecordsActions {
+  const [records, setRecords] = useState<QARecord[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch records
+  const fetchRecords = useCallback(async (filters?: any) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await recordsService.fetchRecords(filters);
+      setRecords(data);
+    } catch (err: any) {
+      setError(err.message || 'Failed to fetch records');
+      console.error('useRecords.fetchRecords error:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Get single record
+  const getRecord = useCallback(async (id: string): Promise<QARecord | null> => {
+    try {
+      setError(null);
+      return await recordsService.fetchRecord(id);
+    } catch (err: any) {
+      setError(err.message || 'Failed to fetch record');
+      return null;
+    }
+  }, []);
+
+  // Create record
+  const createRecord = useCallback(async (data: any): Promise<QARecord> => {
+    try {
+      setError(null);
+      const newRecord = await recordsService.createRecord(data);
+      setRecords(prev => [...prev, newRecord]);
+      return newRecord;
+    } catch (err: any) {
+      setError(err.message || 'Failed to create record');
+      throw err;
+    }
+  }, []);
+
+  // Update record
+  const updateRecord = useCallback(async (id: string, data: any): Promise<QARecord> => {
+    try {
+      setError(null);
+      const updated = await recordsService.updateRecord(id, data);
+      setRecords(prev => prev.map(r => (r.id === id ? updated : r)));
+      return updated;
+    } catch (err: any) {
+      setError(err.message || 'Failed to update record');
+      throw err;
+    }
+  }, []);
+
+  // Delete record
+  const deleteRecord = useCallback(async (id: string) => {
+    try {
+      setError(null);
+      await recordsService.removeRecord(id);
+      setRecords(prev => prev.filter(r => r.id !== id));
+    } catch (err: any) {
+      setError(err.message || 'Failed to delete record');
+      throw err;
+    }
+  }, []);
+
+  // Approve record
+  const approveRecord = useCallback(async (id: string): Promise<QARecord> => {
+    try {
+      setError(null);
+      const approved = await recordsService.approveRecord(id);
+      setRecords(prev => prev.map(r => (r.id === id ? approved : r)));
+      return approved;
+    } catch (err: any) {
+      setError(err.message || 'Failed to approve record');
+      throw err;
+    }
+  }, []);
+
+  // Reject record
+  const rejectRecord = useCallback(async (id: string, reason?: string): Promise<QARecord> => {
+    try {
+      setError(null);
+      const rejected = await recordsService.rejectRecord(id, reason);
+      setRecords(prev => prev.map(r => (r.id === id ? rejected : r)));
+      return rejected;
+    } catch (err: any) {
+      setError(err.message || 'Failed to reject record');
+      throw err;
+    }
+  }, []);
+
+  // Clear error
+  const clearError = useCallback(() => {
+    setError(null);
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      recordsService.cleanupRecordsService();
+    };
+  }, []);
+
+  return {
+    records,
+    loading,
+    error,
+    fetchRecords,
+    getRecord,
+    createRecord,
+    updateRecord,
+    deleteRecord,
+    approveRecord,
+    rejectRecord,
+    clearError,
+  };
+}
+
+export default useRecords;
