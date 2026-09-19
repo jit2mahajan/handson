@@ -1,0 +1,31 @@
+services:
+  influxdb:
+    image: influxdb:1.8
+    container_name: k6-influxdb
+    environment:
+      - INFLUXDB_DB=k6
+      - INFLUXDB_HTTP_FLUX_ENABLED=true
+    ports:
+      - "8086:8086"
+    networks:
+      - k6-observability
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: k6-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+    volumes:
+      - ./grafana-k6/provisioning:/etc/grafana/provisioning
+      - ./grafana-k6/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - influxdb
+    networks:
+      - k6-observability
+
+networks:
+  k6-observability:
+    driver: bridge

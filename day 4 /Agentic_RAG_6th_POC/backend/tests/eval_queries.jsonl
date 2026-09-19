@@ -1,0 +1,8 @@
+{"query": "What is the biological function of the BRCA1 gene and its association with cancer risk?", "expected_domains": ["target_identification_validation"], "expected_answer_status": "answered"}
+{"query": "What is the molecular formula and molecular weight of aspirin?", "expected_domains": ["chemical_compound_intelligence"], "expected_answer_status": "answered"}
+{"query": "What clinical trials are currently recruiting for pembrolizumab?", "expected_domains": ["clinical_safety_intelligence"], "expected_answer_status": "escalated"}
+{"query": "What adverse events have been reported for metformin and what is its FDA approval status?", "expected_domains": ["clinical_safety_intelligence", "competitive_regulatory_intelligence"], "expected_answer_status": "escalated"}
+{"query": "What is the chemical structure of imatinib and what clinical trial safety data exists for it?", "expected_domains": ["chemical_compound_intelligence", "clinical_safety_intelligence"], "expected_answer_status": "escalated"}
+{"query": "What is the patent landscape and competitor pipeline status for a compound called Zyzzyxolimab-9999?", "expected_domains": ["chemical_compound_intelligence", "competitive_regulatory_intelligence"], "expected_answer_status": "insufficient_evidence"}
+{"query": "What is the correlation between a patient's astrological sign and their response to compound X?", "expected_domains": ["chemical_compound_intelligence", "clinical_safety_intelligence"], "expected_answer_status": "escalated"}
+{"query": "How many manufacturing employees does a mid-size logistics company typically have?", "expected_domains": [], "expected_answer_status": "insufficient_evidence"}

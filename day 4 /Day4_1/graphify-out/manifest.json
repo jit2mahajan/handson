@@ -1,0 +1,38 @@
+{
+  ".mcp.json": {
+    "mtime": 1789794413.0780766,
+    "seen": 1789795294.0387046,
+    "ast_hash": "133f5769e83b2fafe7653d55be636ec5",
+    "semantic_hash": "133f5769e83b2fafe7653d55be636ec5"
+  },
+  "package.json": {
+    "mtime": 1789794306.70034,
+    "seen": 1789795294.0387113,
+    "ast_hash": "29c740a50c4c0b2aaa8f8cab34531585",
+    "semantic_hash": "29c740a50c4c0b2aaa8f8cab34531585"
+  },
+  "public/script.js": {
+    "mtime": 1789794346.3203485,
+    "seen": 1789795294.0387142,
+    "ast_hash": "3a11e4a187f6469606742a677e443ec2",
+    "semantic_hash": "3a11e4a187f6469606742a677e443ec2"
+  },
+  "server.js": {
+    "mtime": 1789794318.5331106,
+    "seen": 1789795294.038716,
+    "ast_hash": "47feb3a712c3cc95376ce2d5f55940d9",
+    "semantic_hash": "47feb3a712c3cc95376ce2d5f55940d9"
+  },
+  ".claude/agents/backend.md": {
+    "mtime": 1789794360.188268,
+    "seen": 1789795294.0387177,
+    "ast_hash": "7ba843d4e95fd1be566fb1b1c93170a4",
+    "semantic_hash": "7ba843d4e95fd1be566fb1b1c93170a4"
+  },
+  "public/index.html": {
+    "mtime": 1789794327.7287881,
+    "seen": 1789795294.0387192,
+    "ast_hash": "577080366b4fd3079bf146bfbc9eecd3",
+    "semantic_hash": "577080366b4fd3079bf146bfbc9eecd3"
+  }
+}

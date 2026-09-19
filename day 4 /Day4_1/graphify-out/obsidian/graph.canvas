@@ -1,0 +1,679 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Package Manifest",
+      "x": 0,
+      "y": 0,
+      "width": 880,
+      "height": 420,
+      "color": "1"
+    },
+    {
+      "id": "n_package_dependencies",
+      "type": "file",
+      "file": "dependencies.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_description",
+      "type": "file",
+      "file": "description.md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_dependencies_express",
+      "type": "file",
+      "file": "express.md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ref_express",
+      "type": "file",
+      "file": "express_1.md",
+      "x": 620,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_main",
+      "type": "file",
+      "file": "main.md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_name",
+      "type": "file",
+      "file": "name.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package",
+      "type": "file",
+      "file": "package.json.md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_scripts",
+      "type": "file",
+      "file": "scripts.md",
+      "x": 620,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_scripts_start",
+      "type": "file",
+      "file": "start.md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_package_version",
+      "type": "file",
+      "file": "version.md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "Frontend Result & Error Display",
+      "x": 960,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_public_index_error_element",
+      "type": "file",
+      "file": "error message paragraph.md",
+      "x": 980,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_result_section",
+      "type": "file",
+      "file": "result section (invested amount  returns  total value).md",
+      "x": 1180,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n__claude_agents_backend_input_validation",
+      "type": "file",
+      "file": "API input validation & 400 error handling.md",
+      "x": 1380,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_page",
+      "type": "file",
+      "file": "SIP Calculator HTML page (index.html).md",
+      "x": 980,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_script_js",
+      "type": "file",
+      "file": "script.js (linked script).md",
+      "x": 1180,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_style_css",
+      "type": "file",
+      "file": "style.css (linked stylesheet).md",
+      "x": 1380,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Express Server Setup",
+      "x": 1700,
+      "y": 0,
+      "width": 660,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_server_app",
+      "type": "file",
+      "file": "app.md",
+      "x": 1720,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_server_express",
+      "type": "file",
+      "file": "express_2.md",
+      "x": 1920,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_server_path",
+      "type": "file",
+      "file": "path.md",
+      "x": 2120,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ref_path",
+      "type": "file",
+      "file": "ref_path.md",
+      "x": 1720,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_server_round2",
+      "type": "file",
+      "file": "round2().md",
+      "x": 1920,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_server",
+      "type": "file",
+      "file": "server.js.md",
+      "x": 2120,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "SIP Calculation Backend",
+      "x": 0,
+      "y": 500,
+      "width": 660,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n__claude_agents_backend_api_calculate",
+      "type": "file",
+      "file": "apicalculate route.md",
+      "x": 20,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n__claude_agents_backend_default_annual_return",
+      "type": "file",
+      "file": "DEFAULT_ANNUAL_RETURN constant.md",
+      "x": 220,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n__claude_agents_backend_sip_formula",
+      "type": "file",
+      "file": "SIP future-value formula.md",
+      "x": 420,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n__claude_agents_backend_agent",
+      "type": "file",
+      "file": "backend agent (SIP Calculator backend owner).md",
+      "x": 20,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n__claude_agents_backend_mcp_fetch_tool",
+      "type": "file",
+      "file": "mcp__fetch__fetch tool.md",
+      "x": 220,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Script DOM Bindings",
+      "x": 960,
+      "y": 500,
+      "width": 660,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_public_script_currency",
+      "type": "file",
+      "file": "currency.md",
+      "x": 980,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_script_errorel",
+      "type": "file",
+      "file": "errorEl.md",
+      "x": 1180,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_script_form",
+      "type": "file",
+      "file": "form.md",
+      "x": 1380,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_script_resultsection",
+      "type": "file",
+      "file": "resultSection.md",
+      "x": 980,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_script",
+      "type": "file",
+      "file": "script.js.md",
+      "x": 1180,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "SIP Input Form",
+      "x": 1700,
+      "y": 500,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_public_index_annualreturnrate_input",
+      "type": "file",
+      "file": "annualReturnRate input.md",
+      "x": 1720,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_monthlyinvestment_input",
+      "type": "file",
+      "file": "monthlyInvestment input.md",
+      "x": 1920,
+      "y": 580,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_sip_form",
+      "type": "file",
+      "file": "sip-form (calculator input form).md",
+      "x": 1720,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_public_index_years_input",
+      "type": "file",
+      "file": "years input.md",
+      "x": 1920,
+      "y": 660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "MCP Fetch Config",
+      "x": 0,
+      "y": 980,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_mcp",
+      "type": "file",
+      "file": "dot-mcp.json.md",
+      "x": 20,
+      "y": 1060,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_mcp_mcp_server_fetch",
+      "type": "file",
+      "file": "fetch.md",
+      "x": 220,
+      "y": 1060,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_mcp_command_python3",
+      "type": "file",
+      "file": "python3.md",
+      "x": 20,
+      "y": 1140,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_server_round2_server",
+      "fromNode": "n_server_round2",
+      "toNode": "n_server",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_ref_express",
+      "fromNode": "n_package",
+      "toNode": "n_ref_express",
+      "label": "imports [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_name",
+      "fromNode": "n_package",
+      "toNode": "n_package_name",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_version",
+      "fromNode": "n_package",
+      "toNode": "n_package_version",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_description",
+      "fromNode": "n_package",
+      "toNode": "n_package_description",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_main",
+      "fromNode": "n_package",
+      "toNode": "n_package_main",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_scripts",
+      "fromNode": "n_package",
+      "toNode": "n_package_scripts",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_package_dependencies",
+      "fromNode": "n_package",
+      "toNode": "n_package_dependencies",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_dependencies_package_dependencies_express",
+      "fromNode": "n_package_dependencies",
+      "toNode": "n_package_dependencies_express",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_package_scripts_package_scripts_start",
+      "fromNode": "n_package_scripts",
+      "toNode": "n_package_scripts_start",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ref_express_server",
+      "fromNode": "n_ref_express",
+      "toNode": "n_server",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_server_ref_path",
+      "fromNode": "n_server",
+      "toNode": "n_ref_path",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_server_server_express",
+      "fromNode": "n_server",
+      "toNode": "n_server_express",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_server_server_path",
+      "fromNode": "n_server",
+      "toNode": "n_server_path",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_server_server_app",
+      "fromNode": "n_server",
+      "toNode": "n_server_app",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_public_script_public_script_form",
+      "fromNode": "n_public_script",
+      "toNode": "n_public_script_form",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_public_script_public_script_resultsection",
+      "fromNode": "n_public_script",
+      "toNode": "n_public_script_resultsection",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_public_script_public_script_errorel",
+      "fromNode": "n_public_script",
+      "toNode": "n_public_script_errorel",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_public_script_public_script_currency",
+      "fromNode": "n_public_script",
+      "toNode": "n_public_script_currency",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_mcp_mcp_mcp_server_fetch",
+      "fromNode": "n_mcp",
+      "toNode": "n_mcp_mcp_server_fetch",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_mcp_command_python3_mcp_mcp_server_fetch",
+      "fromNode": "n_mcp_command_python3",
+      "toNode": "n_mcp_mcp_server_fetch",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_error_element_public_index_page",
+      "fromNode": "n_public_index_error_element",
+      "toNode": "n_public_index_page",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_error_element__claude_agents_backend_input_validation",
+      "fromNode": "n_public_index_error_element",
+      "toNode": "n__claude_agents_backend_input_validation",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_public_index_page_public_index_result_section",
+      "fromNode": "n_public_index_page",
+      "toNode": "n_public_index_result_section",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_page_public_index_script_js",
+      "fromNode": "n_public_index_page",
+      "toNode": "n_public_index_script_js",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_page_public_index_sip_form",
+      "fromNode": "n_public_index_page",
+      "toNode": "n_public_index_sip_form",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_page_public_index_style_css",
+      "fromNode": "n_public_index_page",
+      "toNode": "n_public_index_style_css",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_result_section__claude_agents_backend_sip_formula",
+      "fromNode": "n_public_index_result_section",
+      "toNode": "n__claude_agents_backend_sip_formula",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e_public_index_script_js__claude_agents_backend_api_calculate",
+      "fromNode": "n_public_index_script_js",
+      "toNode": "n__claude_agents_backend_api_calculate",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e__claude_agents_backend_input_validation__claude_agents_backend_agent",
+      "fromNode": "n__claude_agents_backend_input_validation",
+      "toNode": "n__claude_agents_backend_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_api_calculate__claude_agents_backend_agent",
+      "fromNode": "n__claude_agents_backend_api_calculate",
+      "toNode": "n__claude_agents_backend_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_api_calculate__claude_agents_backend_sip_formula",
+      "fromNode": "n__claude_agents_backend_api_calculate",
+      "toNode": "n__claude_agents_backend_sip_formula",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_api_calculate_public_index_sip_form",
+      "fromNode": "n__claude_agents_backend_api_calculate",
+      "toNode": "n_public_index_sip_form",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e__claude_agents_backend_default_annual_return__claude_agents_backend_agent",
+      "fromNode": "n__claude_agents_backend_default_annual_return",
+      "toNode": "n__claude_agents_backend_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_default_annual_return__claude_agents_backend_mcp_fetch_tool",
+      "fromNode": "n__claude_agents_backend_default_annual_return",
+      "toNode": "n__claude_agents_backend_mcp_fetch_tool",
+      "label": "shares_data_with [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_default_annual_return__claude_agents_backend_sip_formula",
+      "fromNode": "n__claude_agents_backend_default_annual_return",
+      "toNode": "n__claude_agents_backend_sip_formula",
+      "label": "conceptually_related_to [INFERRED]"
+    },
+    {
+      "id": "e__claude_agents_backend_default_annual_return_public_index_annualreturnrate_input",
+      "fromNode": "n__claude_agents_backend_default_annual_return",
+      "toNode": "n_public_index_annualreturnrate_input",
+      "label": "semantically_similar_to [INFERRED]"
+    },
+    {
+      "id": "e__claude_agents_backend_mcp_fetch_tool__claude_agents_backend_agent",
+      "fromNode": "n__claude_agents_backend_mcp_fetch_tool",
+      "toNode": "n__claude_agents_backend_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e__claude_agents_backend_sip_formula__claude_agents_backend_agent",
+      "fromNode": "n__claude_agents_backend_sip_formula",
+      "toNode": "n__claude_agents_backend_agent",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_annualreturnrate_input_public_index_sip_form",
+      "fromNode": "n_public_index_annualreturnrate_input",
+      "toNode": "n_public_index_sip_form",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_monthlyinvestment_input_public_index_sip_form",
+      "fromNode": "n_public_index_monthlyinvestment_input",
+      "toNode": "n_public_index_sip_form",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_public_index_sip_form_public_index_years_input",
+      "fromNode": "n_public_index_sip_form",
+      "toNode": "n_public_index_years_input",
+      "label": "references [EXTRACTED]"
+    }
+  ]
+}

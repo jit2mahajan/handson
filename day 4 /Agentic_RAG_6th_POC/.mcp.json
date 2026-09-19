@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "pharma-governance": {
+      "command": "python3",
+      "args": ["mcp-servers/pharma-governance-mcp/server.py"],
+      "env": {
+        "CLAUDE_PROJECT_DIR": "${CLAUDE_PROJECT_DIR}"
+      }
+    }
+  }
+}

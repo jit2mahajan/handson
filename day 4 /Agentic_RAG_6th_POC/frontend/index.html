@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIDLC — Agentic RAG for Drug-Discovery Intelligence</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>AIDLC — Literature Review &amp; Drug-Discovery Intelligence</h1>
+    <p class="subtitle">Grounded evidence retrieval. Supports discovery and synthesis — does not make the scientific decision.</p>
+  </header>
+
+  <!-- Provider-fallback "Connect" panel: hidden until a /query call reports the
+       default LLM provider is unreachable. See app.js PROVIDER_UNREACHABLE
+       detection convention. -->
+  <section id="connect-panel" class="connect-panel hidden" aria-live="polite">
+    <h2>Default LLM provider unreachable</h2>
+    <p>The backend could not reach its default LLM provider. Supply an alternate provider's API key to continue this session. The key is sent directly to the backend and is never stored in this browser.</p>
+    <form id="connect-form">
+      <div class="field">
+        <label for="provider-name">Provider name</label>
+        <input type="text" id="provider-name" name="provider" placeholder="e.g. openrouter" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="provider-key">API key</label>
+        <input type="password" id="provider-key" name="api_key" placeholder="Paste API key" required autocomplete="off">
+      </div>
+      <div class="actions">
+        <button type="submit">Save &amp; retry</button>
+        <button type="button" class="secondary" id="connect-dismiss">Dismiss</button>
+      </div>
+    </form>
+    <div id="connect-confirmation" class="connect-confirmation hidden"></div>
+  </section>
+
+  <form id="query-form" class="query-form">
+    <input type="text" id="query-input" name="query" placeholder="Ask a research question…" required autocomplete="off">
+    <button type="submit" id="query-submit">Ask</button>
+  </form>
+
+  <div id="results"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

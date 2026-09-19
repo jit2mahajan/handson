@@ -1,0 +1,482 @@
+{
+  ".claude/hooks/audit_retrieval_log.py": {
+    "mtime": 1789812578.2744994,
+    "seen": 1789817654.6323965,
+    "ast_hash": "022459c2e4661887402c312cec96857d",
+    "semantic_hash": "022459c2e4661887402c312cec96857d"
+  },
+  ".claude/hooks/check_allowlist_retrieval.py": {
+    "mtime": 1789810905.2302282,
+    "seen": 1789817654.6324039,
+    "ast_hash": "f94a685546feb674962e041301d784af",
+    "semantic_hash": "f94a685546feb674962e041301d784af"
+  },
+  ".claude/hooks/human_gate.py": {
+    "mtime": 1789810918.2471871,
+    "seen": 1789817654.632407,
+    "ast_hash": "8624253a9d24c3fa9fadfc31b796f8c9",
+    "semantic_hash": "8624253a9d24c3fa9fadfc31b796f8c9"
+  },
+  ".claude/settings.json": {
+    "mtime": 1789813481.50505,
+    "seen": 1789817654.6324089,
+    "ast_hash": "dd3fd27a6147aeed5efda734dd619274",
+    "semantic_hash": "dd3fd27a6147aeed5efda734dd619274"
+  },
+  ".mcp.json": {
+    "mtime": 1789813239.9132493,
+    "seen": 1789817654.63241,
+    "ast_hash": "36826a76a4f67b7958a0af3f536daa98",
+    "semantic_hash": "36826a76a4f67b7958a0af3f536daa98"
+  },
+  "backend/__init__.py": {
+    "mtime": 1789813509.0340784,
+    "seen": 1789817654.6324115,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/__init__.py": {
+    "mtime": 1789813509.0400786,
+    "seen": 1789817654.632413,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/api/__init__.py": {
+    "mtime": 1789813509.0770814,
+    "seen": 1789817654.6324139,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/api/main.py": {
+    "mtime": 1789816804.929923,
+    "seen": 1789817654.6324155,
+    "ast_hash": "a061c04af433e5e840853ad55d346946",
+    "semantic_hash": "a061c04af433e5e840853ad55d346946"
+  },
+  "backend/src/grounding/__init__.py": {
+    "mtime": 1789813509.0620804,
+    "seen": 1789817654.6324167,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/grounding/grounding.py": {
+    "mtime": 1789815897.0850322,
+    "seen": 1789817654.6324182,
+    "ast_hash": "eba2312cb30e83f4f9e5c6802887cf98",
+    "semantic_hash": "eba2312cb30e83f4f9e5c6802887cf98"
+  },
+  "backend/src/orchestrator/__init__.py": {
+    "mtime": 1789813509.05708,
+    "seen": 1789817654.6324196,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/orchestrator/orchestrator.py": {
+    "mtime": 1789816899.190704,
+    "seen": 1789817654.6324208,
+    "ast_hash": "15c0d5aae78dc9d78d95663b5e21068e",
+    "semantic_hash": "15c0d5aae78dc9d78d95663b5e21068e"
+  },
+  "backend/src/retrieval/__init__.py": {
+    "mtime": 1789813509.0520797,
+    "seen": 1789817654.632422,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/retrieval/clinicaltrials.py": {
+    "mtime": 1789814470.755939,
+    "seen": 1789817654.632423,
+    "ast_hash": "13a68db82f542bb60a1d395d3dd3a30c",
+    "semantic_hash": "13a68db82f542bb60a1d395d3dd3a30c"
+  },
+  "backend/src/retrieval/openfda.py": {
+    "mtime": 1789813498.268285,
+    "seen": 1789817654.632424,
+    "ast_hash": "66968b1c8354f66982be3e7fbee31bc9",
+    "semantic_hash": "66968b1c8354f66982be3e7fbee31bc9"
+  },
+  "backend/src/retrieval/opentargets.py": {
+    "mtime": 1789813477.381108,
+    "seen": 1789817654.6324258,
+    "ast_hash": "688abf194ddac17992d6e893c0ccfec8",
+    "semantic_hash": "688abf194ddac17992d6e893c0ccfec8"
+  },
+  "backend/src/retrieval/pubchem.py": {
+    "mtime": 1789814315.4074926,
+    "seen": 1789817654.632427,
+    "ast_hash": "1db8b0afadac1d896c54e29d36bf2068",
+    "semantic_hash": "1db8b0afadac1d896c54e29d36bf2068"
+  },
+  "backend/src/retrieval/pubmed.py": {
+    "mtime": 1789813434.629596,
+    "seen": 1789817654.632428,
+    "ast_hash": "1c577a6839c0aac83d1ee46b941c0f99",
+    "semantic_hash": "1c577a6839c0aac83d1ee46b941c0f99"
+  },
+  "backend/src/utils/__init__.py": {
+    "mtime": 1789813509.0460792,
+    "seen": 1789817654.6324294,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/utils/allowlist.py": {
+    "mtime": 1789815869.2824028,
+    "seen": 1789817654.6324308,
+    "ast_hash": "744afb1d6cf68d7612c55d4f8135537d",
+    "semantic_hash": "744afb1d6cf68d7612c55d4f8135537d"
+  },
+  "backend/src/validation/__init__.py": {
+    "mtime": 1789813509.0690808,
+    "seen": 1789817654.632432,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "backend/src/validation/schema_validate.py": {
+    "mtime": 1789813523.497144,
+    "seen": 1789817654.6324337,
+    "ast_hash": "60e8da2c026e4d299a3493be3fe2bb18",
+    "semantic_hash": "60e8da2c026e4d299a3493be3fe2bb18"
+  },
+  "data/allowlist/sources.json": {
+    "mtime": 1789816140.2995887,
+    "seen": 1789817654.6324348,
+    "ast_hash": "617cc2e1c89c5d56b46128249857e2f8",
+    "semantic_hash": "617cc2e1c89c5d56b46128249857e2f8"
+  },
+  "data/schema/response_schema.json": {
+    "mtime": 1789810886.6928623,
+    "seen": 1789817654.6324365,
+    "ast_hash": "01060fb94a141b8b7b2a8904bbbc06dc",
+    "semantic_hash": "01060fb94a141b8b7b2a8904bbbc06dc"
+  },
+  "frontend/app.js": {
+    "mtime": 1789815680.525076,
+    "seen": 1789817654.632438,
+    "ast_hash": "9420a4117fdca47d9f3d58b5c8ce4616",
+    "semantic_hash": "9420a4117fdca47d9f3d58b5c8ce4616"
+  },
+  "loadtest/k6/query_load_test.js": {
+    "mtime": 1789813548.7860072,
+    "seen": 1789817654.6324394,
+    "ast_hash": "00dd6b4fc5b8e3f74957c8332e9bd604",
+    "semantic_hash": "00dd6b4fc5b8e3f74957c8332e9bd604"
+  },
+  "mcp-servers/pharma-governance-mcp/server.py": {
+    "mtime": 1789813167.1028845,
+    "seen": 1789817654.6324403,
+    "ast_hash": "2cadab55c50bebf7c2fa3ea1dadea4fc",
+    "semantic_hash": "2cadab55c50bebf7c2fa3ea1dadea4fc"
+  },
+  "plugins/pharma-rag-governance/hooks/audit_retrieval_log.py": {
+    "mtime": 1789813012.257699,
+    "seen": 1789817654.6324415,
+    "ast_hash": "022459c2e4661887402c312cec96857d",
+    "semantic_hash": "022459c2e4661887402c312cec96857d"
+  },
+  "plugins/pharma-rag-governance/hooks/check_allowlist_retrieval.py": {
+    "mtime": 1789813012.25777,
+    "seen": 1789817654.632443,
+    "ast_hash": "f94a685546feb674962e041301d784af",
+    "semantic_hash": "f94a685546feb674962e041301d784af"
+  },
+  "plugins/pharma-rag-governance/hooks/human_gate.py": {
+    "mtime": 1789813012.257852,
+    "seen": 1789817654.6324441,
+    "ast_hash": "8624253a9d24c3fa9fadfc31b796f8c9",
+    "semantic_hash": "8624253a9d24c3fa9fadfc31b796f8c9"
+  },
+  "plugins/pharma-rag-governance/plugin.json": {
+    "mtime": 1789813021.8281806,
+    "seen": 1789817654.632445,
+    "ast_hash": "464ea2d6d64d38a24ca828a5726302aa",
+    "semantic_hash": "464ea2d6d64d38a24ca828a5726302aa"
+  },
+  "templates/agentic-governance-scaffold/.claude/hooks/audit_retrieval_log.py": {
+    "mtime": 1789812862.6135952,
+    "seen": 1789817654.6324465,
+    "ast_hash": "022459c2e4661887402c312cec96857d",
+    "semantic_hash": "022459c2e4661887402c312cec96857d"
+  },
+  "templates/agentic-governance-scaffold/.claude/hooks/check_allowlist_retrieval.py": {
+    "mtime": 1789812894.0793967,
+    "seen": 1789817654.6324477,
+    "ast_hash": "deeba51e6e47765156efc354b74176f0",
+    "semantic_hash": "deeba51e6e47765156efc354b74176f0"
+  },
+  "templates/agentic-governance-scaffold/.claude/hooks/human_gate.py": {
+    "mtime": 1789812862.61376,
+    "seen": 1789817654.632449,
+    "ast_hash": "8624253a9d24c3fa9fadfc31b796f8c9",
+    "semantic_hash": "8624253a9d24c3fa9fadfc31b796f8c9"
+  },
+  "templates/agentic-governance-scaffold/.claude/settings.json": {
+    "mtime": 1789812931.632535,
+    "seen": 1789817654.6324503,
+    "ast_hash": "1a08c3ef485eb8dbef800637d27d7ca5",
+    "semantic_hash": "1a08c3ef485eb8dbef800637d27d7ca5"
+  },
+  "templates/agentic-governance-scaffold/data/allowlist/sources.json": {
+    "mtime": 1789812900.3552303,
+    "seen": 1789817654.6324515,
+    "ast_hash": "d9942232717cf42d766fc5bb141bd542",
+    "semantic_hash": "d9942232717cf42d766fc5bb141bd542"
+  },
+  "templates/agentic-governance-scaffold/data/schema/response_schema.json": {
+    "mtime": 1789812915.5463498,
+    "seen": 1789817654.632453,
+    "ast_hash": "e01ef221a6a02ce084184b7cf612f5ec",
+    "semantic_hash": "e01ef221a6a02ce084184b7cf612f5ec"
+  },
+  ".claude/agents/backend.md": {
+    "mtime": 1789812713.9324946,
+    "seen": 1789817654.6324542,
+    "ast_hash": "a100db49a45116f75f6ffc78d871e225",
+    "semantic_hash": "a100db49a45116f75f6ffc78d871e225"
+  },
+  ".claude/agents/frontend.md": {
+    "mtime": 1789812732.259845,
+    "seen": 1789817654.6324556,
+    "ast_hash": "d0e3d9e5618dd224e131366e9ea8dec1",
+    "semantic_hash": "d0e3d9e5618dd224e131366e9ea8dec1"
+  },
+  ".claude/agents/p3-triage.md": {
+    "mtime": 1789812750.8842173,
+    "seen": 1789817654.6324573,
+    "ast_hash": "2c4f5a184b0e571c1313bc1c0cdba798",
+    "semantic_hash": "2c4f5a184b0e571c1313bc1c0cdba798"
+  },
+  ".claude/skills/pharma-rag-principles/SKILL.md": {
+    "mtime": 1789812611.5299497,
+    "seen": 1789817654.6324584,
+    "ast_hash": "14cd6f39aa2be7ae91660cfcb1a15957",
+    "semantic_hash": "14cd6f39aa2be7ae91660cfcb1a15957"
+  },
+  ".claude/skills/pharma-rag-principles/references/agent-context-contract.md": {
+    "mtime": 1789812686.0654414,
+    "seen": 1789817654.6324599,
+    "ast_hash": "03e412c52570bd99fd065b410e66de15",
+    "semantic_hash": "03e412c52570bd99fd065b410e66de15"
+  },
+  ".claude/skills/pharma-rag-principles/references/allowlist.md": {
+    "mtime": 1789812624.7379227,
+    "seen": 1789817654.632462,
+    "ast_hash": "7ff0bb76d54cef2e1443a0568b891e1b",
+    "semantic_hash": "7ff0bb76d54cef2e1443a0568b891e1b"
+  },
+  ".claude/skills/pharma-rag-principles/references/context-management.md": {
+    "mtime": 1789812696.1401837,
+    "seen": 1789817654.6324635,
+    "ast_hash": "d6f5c6fa6c01ad4f6133a56c14b5b1a3",
+    "semantic_hash": "d6f5c6fa6c01ad4f6133a56c14b5b1a3"
+  },
+  ".claude/skills/pharma-rag-principles/references/domain-routing.md": {
+    "mtime": 1789812673.6085236,
+    "seen": 1789817654.6324646,
+    "ast_hash": "b1a4881e826a180ade2aed986d66650b",
+    "semantic_hash": "b1a4881e826a180ade2aed986d66650b"
+  },
+  ".claude/skills/pharma-rag-principles/references/escalation-rules.md": {
+    "mtime": 1789812656.0862324,
+    "seen": 1789817654.6324656,
+    "ast_hash": "318c4384ad9181b8bbee5230dff0a903",
+    "semantic_hash": "318c4384ad9181b8bbee5230dff0a903"
+  },
+  ".claude/skills/pharma-rag-principles/references/output-schema.md": {
+    "mtime": 1789812639.7780309,
+    "seen": 1789817654.632467,
+    "ast_hash": "7aa7ede319a1c2fd5a95adef10a8b70d",
+    "semantic_hash": "7aa7ede319a1c2fd5a95adef10a8b70d"
+  },
+  "CLAUDE.md": {
+    "mtime": 1789812777.6127043,
+    "seen": 1789817654.6324682,
+    "ast_hash": "6c973cb828d45b383e7d5500fcba5096",
+    "semantic_hash": "6c973cb828d45b383e7d5500fcba5096"
+  },
+  "README.md": {
+    "mtime": 1789813043.2617598,
+    "seen": 1789817654.6324697,
+    "ast_hash": "97f2904335d5a51e66a701dca3b6c5bc",
+    "semantic_hash": "97f2904335d5a51e66a701dca3b6c5bc"
+  },
+  "backend/README.md": {
+    "mtime": 1789813849.0951343,
+    "seen": 1789817654.6324708,
+    "ast_hash": "c1e404ebe3b7e4c34de3d941d2614895",
+    "semantic_hash": "c1e404ebe3b7e4c34de3d941d2614895"
+  },
+  "backend/requirements.txt": {
+    "mtime": 1789816751.4189804,
+    "seen": 1789817654.632472,
+    "ast_hash": "d4b72b12f71e4199a1ca3a08256c697b",
+    "semantic_hash": "d4b72b12f71e4199a1ca3a08256c697b"
+  },
+  "backend/src/prompts/CHANGELOG.md": {
+    "mtime": 1789816410.8618877,
+    "seen": 1789817654.6324732,
+    "ast_hash": "d538db9d0697624224be357fb71e99bd",
+    "semantic_hash": "d538db9d0697624224be357fb71e99bd"
+  },
+  "backend/src/prompts/domain_classifier_prompt_v1.md": {
+    "mtime": 1789813748.5727277,
+    "seen": 1789817654.6324747,
+    "ast_hash": "73ab9d392d5dab7914cbdc7c1138e05e",
+    "semantic_hash": "73ab9d392d5dab7914cbdc7c1138e05e"
+  },
+  "backend/src/prompts/grounding_prompt_v1.md": {
+    "mtime": 1789813756.1572864,
+    "seen": 1789817654.6324759,
+    "ast_hash": "41b518c1a500edec66a070be0536b4ca",
+    "semantic_hash": "41b518c1a500edec66a070be0536b4ca"
+  },
+  "frontend/README.md": {
+    "mtime": 1789815690.7538297,
+    "seen": 1789817654.6324773,
+    "ast_hash": "4fd6a9a247b88d448a87108c7224d99c",
+    "semantic_hash": "4fd6a9a247b88d448a87108c7224d99c"
+  },
+  "frontend/index.html": {
+    "mtime": 1789813243.7445316,
+    "seen": 1789817654.6324782,
+    "ast_hash": "5c1fc4c5b0ce48118d235b0701e2e5b0",
+    "semantic_hash": "5c1fc4c5b0ce48118d235b0701e2e5b0"
+  },
+  "knowledge-vault/Architecture-Decisions.md": {
+    "mtime": 1789813669.6955464,
+    "seen": 1789817654.6324794,
+    "ast_hash": "d3cdd250423c215dc1d4ac8a9b6ab8bb",
+    "semantic_hash": "d3cdd250423c215dc1d4ac8a9b6ab8bb"
+  },
+  "knowledge-vault/Home.md": {
+    "mtime": 1789813610.2974334,
+    "seen": 1789817654.6324809,
+    "ast_hash": "c09e4b15f4ba49054e1a4dd9fe530cc5",
+    "semantic_hash": "c09e4b15f4ba49054e1a4dd9fe530cc5"
+  },
+  "knowledge-vault/README.md": {
+    "mtime": 1789813599.093714,
+    "seen": 1789817654.632482,
+    "ast_hash": "60b504e3d37689e9cc38487c594e7dee",
+    "semantic_hash": "60b504e3d37689e9cc38487c594e7dee"
+  },
+  "knowledge-vault/Roadmap.md": {
+    "mtime": 1789817105.491057,
+    "seen": 1789817654.632483,
+    "ast_hash": "39ccbd3bb6a982597e0faca4aeb79979",
+    "semantic_hash": "39ccbd3bb6a982597e0faca4aeb79979"
+  },
+  "loadtest/README.md": {
+    "mtime": 1789813566.1392858,
+    "seen": 1789817654.6324844,
+    "ast_hash": "2f8d35b3186bee5b972311aa7af59769",
+    "semantic_hash": "2f8d35b3186bee5b972311aa7af59769"
+  },
+  "mcp-servers/pharma-governance-mcp/README.md": {
+    "mtime": 1789813228.5734136,
+    "seen": 1789817654.6324854,
+    "ast_hash": "9718f4768a386aa26542b8328013a64f",
+    "semantic_hash": "9718f4768a386aa26542b8328013a64f"
+  },
+  "mcp-servers/pharma-governance-mcp/requirements.txt": {
+    "mtime": 1789813179.0907679,
+    "seen": 1789817654.6324866,
+    "ast_hash": "6b7e94d1003b418e314090d9d424a36d",
+    "semantic_hash": "6b7e94d1003b418e314090d9d424a36d"
+  },
+  "plugins/pharma-rag-governance/agents/backend.md": {
+    "mtime": 1789813012.2532215,
+    "seen": 1789817654.632488,
+    "ast_hash": "a100db49a45116f75f6ffc78d871e225",
+    "semantic_hash": "a100db49a45116f75f6ffc78d871e225"
+  },
+  "plugins/pharma-rag-governance/agents/frontend.md": {
+    "mtime": 1789813012.2533183,
+    "seen": 1789817654.6324892,
+    "ast_hash": "d0e3d9e5618dd224e131366e9ea8dec1",
+    "semantic_hash": "d0e3d9e5618dd224e131366e9ea8dec1"
+  },
+  "plugins/pharma-rag-governance/agents/p3-triage.md": {
+    "mtime": 1789813012.253382,
+    "seen": 1789817654.6324904,
+    "ast_hash": "2c4f5a184b0e571c1313bc1c0cdba798",
+    "semantic_hash": "2c4f5a184b0e571c1313bc1c0cdba798"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/SKILL.md": {
+    "mtime": 1789813012.249302,
+    "seen": 1789817654.6324916,
+    "ast_hash": "14cd6f39aa2be7ae91660cfcb1a15957",
+    "semantic_hash": "14cd6f39aa2be7ae91660cfcb1a15957"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/agent-context-contract.md": {
+    "mtime": 1789813012.2491844,
+    "seen": 1789817654.6324928,
+    "ast_hash": "03e412c52570bd99fd065b410e66de15",
+    "semantic_hash": "03e412c52570bd99fd065b410e66de15"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/allowlist.md": {
+    "mtime": 1789813012.2489197,
+    "seen": 1789817654.632494,
+    "ast_hash": "7ff0bb76d54cef2e1443a0568b891e1b",
+    "semantic_hash": "7ff0bb76d54cef2e1443a0568b891e1b"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/context-management.md": {
+    "mtime": 1789813012.2492313,
+    "seen": 1789817654.6324952,
+    "ast_hash": "d6f5c6fa6c01ad4f6133a56c14b5b1a3",
+    "semantic_hash": "d6f5c6fa6c01ad4f6133a56c14b5b1a3"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/domain-routing.md": {
+    "mtime": 1789813012.2491372,
+    "seen": 1789817654.6324964,
+    "ast_hash": "b1a4881e826a180ade2aed986d66650b",
+    "semantic_hash": "b1a4881e826a180ade2aed986d66650b"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/escalation-rules.md": {
+    "mtime": 1789813012.2490826,
+    "seen": 1789817654.6324975,
+    "ast_hash": "318c4384ad9181b8bbee5230dff0a903",
+    "semantic_hash": "318c4384ad9181b8bbee5230dff0a903"
+  },
+  "plugins/pharma-rag-governance/skills/pharma-rag-principles/references/output-schema.md": {
+    "mtime": 1789813012.2490342,
+    "seen": 1789817654.632499,
+    "ast_hash": "7aa7ede319a1c2fd5a95adef10a8b70d",
+    "semantic_hash": "7aa7ede319a1c2fd5a95adef10a8b70d"
+  },
+  "reports/code-review/2026-09-19-code-review.md": {
+    "mtime": 1789815561.0052698,
+    "seen": 1789817654.6325,
+    "ast_hash": "c644d912921a926d58c2c553b01afd74",
+    "semantic_hash": "c644d912921a926d58c2c553b01afd74"
+  },
+  "templates/agentic-governance-scaffold/.claude/skills/governance-principles/SKILL.md": {
+    "mtime": 1789812942.9973722,
+    "seen": 1789817654.6325014,
+    "ast_hash": "279c8a4123e2b4f4155edd61c6f66c33",
+    "semantic_hash": "279c8a4123e2b4f4155edd61c6f66c33"
+  },
+  "templates/agentic-governance-scaffold/.claude/skills/governance-principles/references/allowlist.md": {
+    "mtime": 1789812951.4719968,
+    "seen": 1789817654.6325026,
+    "ast_hash": "80c8a1254be495aaf3f751517c615b3c",
+    "semantic_hash": "80c8a1254be495aaf3f751517c615b3c"
+  },
+  "templates/agentic-governance-scaffold/.claude/skills/governance-principles/references/escalation-rules.md": {
+    "mtime": 1789812971.0904422,
+    "seen": 1789817654.632504,
+    "ast_hash": "77482ec92caa7f05b290e27049d42a3a",
+    "semantic_hash": "77482ec92caa7f05b290e27049d42a3a"
+  },
+  "templates/agentic-governance-scaffold/.claude/skills/governance-principles/references/output-schema.md": {
+    "mtime": 1789812961.6987503,
+    "seen": 1789817654.6325054,
+    "ast_hash": "d0867d324f82dc5deab2c5f68e8eb904",
+    "semantic_hash": "d0867d324f82dc5deab2c5f68e8eb904"
+  },
+  "templates/agentic-governance-scaffold/SETUP.md": {
+    "mtime": 1789812993.8021157,
+    "seen": 1789817654.6325066,
+    "ast_hash": "0891adf60273fe3e29c52c82993eb251",
+    "semantic_hash": "0891adf60273fe3e29c52c82993eb251"
+  }
+}

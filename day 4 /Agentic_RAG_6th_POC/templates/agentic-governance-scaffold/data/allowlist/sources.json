@@ -1,0 +1,6 @@
+{
+  "domain_a": ["example-source-a1.org", "example-source-a2.org"],
+  "domain_b": ["example-source-b1.org"],
+  "domain_c": ["example-source-c1.org"],
+  "domain_d": ["example-source-d1.org"]
+}

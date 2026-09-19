@@ -1,0 +1,31 @@
+{
+  "target_identification_validation": [
+    "www.ncbi.nlm.nih.gov",
+    "www.uniprot.org",
+    "www.opentargets.org",
+    "api.platform.opentargets.org",
+    "www.genecards.org",
+    "depmap.org"
+  ],
+  "chemical_compound_intelligence": [
+    "pubchem.ncbi.nlm.nih.gov",
+    "www.ebi.ac.uk",
+    "www.rcsb.org",
+    "go.drugbank.com"
+  ],
+  "clinical_safety_intelligence": [
+    "clinicaltrials.gov",
+    "www.accessdata.fda.gov",
+    "www.fda.gov",
+    "api.fda.gov",
+    "www.ema.europa.eu",
+    "www.who.int"
+  ],
+  "competitive_regulatory_intelligence": [
+    "www.fda.gov",
+    "api.fda.gov",
+    "www.ema.europa.eu",
+    "patents.google.com",
+    "www.sec.gov"
+  ]
+}

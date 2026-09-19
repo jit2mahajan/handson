@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+requests
+jsonschema
+pydantic
+
+# Observability (step 15) -- OTel SDK + OTLP/gRPC exporter, exporting to the
+# local SigNoz collector (docker-compose.observability.yml, default
+# http://localhost:4317). See backend/src/observability/otel.py.
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-grpc

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgenticRAGResponse",
+  "type": "object",
+  "required": ["query", "answer_status", "claims", "overall_confidence", "escalation"],
+  "properties": {
+    "query": { "type": "string" },
+    "answer_status": {
+      "enum": ["answered", "insufficient_evidence", "escalated"]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["statement", "confidence", "citations", "evidence_domain"],
+        "properties": {
+          "statement": { "type": "string" },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "evidence_domain": {
+            "enum": [
+              "target_identification_validation",
+              "chemical_compound_intelligence",
+              "clinical_safety_intelligence",
+              "competitive_regulatory_intelligence"
+            ]
+          },
+          "citations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["source_domain", "url", "retrieved_at"],
+              "properties": {
+                "source_domain": { "type": "string" },
+                "url": { "type": "string" },
+                "retrieved_at": { "type": "string", "format": "date-time" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "overall_confidence": { "enum": ["high", "medium", "low"] },
+    "escalation": {
+      "type": "object",
+      "required": ["required", "reason"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "reason": { "type": ["string", "null"] }
+      }
+    },
+    "audit_ref": {
+      "type": "string",
+      "description": "Line offset(s) or session id pointing into .claude/audit/retrieval_log.jsonl"
+    }
+  }
+}
