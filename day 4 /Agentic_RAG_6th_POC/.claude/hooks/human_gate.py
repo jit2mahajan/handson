@@ -7,6 +7,7 @@ Gated:
   2. Escalated responses being logged (escalation.required == true).
   3. A triage report being filed as *final* (non-.draft.md filename).
   4. A new LLM-provider fallback key being stored.
+  5. A spec (security review) report being filed as *final* (non-.draft.md filename).
 """
 import json
 import os
@@ -58,6 +59,13 @@ def main():
     if rel.startswith(triage_dir) and rel.endswith("-compliance-report.md") \
             and not rel.endswith(".draft.md"):
         ask(f"Filing '{rel}' as a final compliance report requires human review "
+            f"before it's persisted.")
+        sys.exit(0)
+
+    spec_dir = os.path.join("reports", "spec")
+    if rel.startswith(spec_dir) and rel.endswith("-security-review.md") \
+            and not rel.endswith(".draft.md"):
+        ask(f"Filing '{rel}' as a final security review requires human review "
             f"before it's persisted.")
         sys.exit(0)
 

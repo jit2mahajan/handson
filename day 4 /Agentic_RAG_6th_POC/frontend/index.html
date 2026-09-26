@@ -39,11 +39,13 @@
   <form id="query-form" class="query-form">
     <input type="text" id="query-input" name="query" placeholder="Ask a research question…" required autocomplete="off">
     <button type="submit" id="query-submit">Ask</button>
+    <button type="button" class="secondary hidden" id="query-cancel">Cancel</button>
   </form>
 
   <div id="results"></div>
 </div>
 
+<script src="escape.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

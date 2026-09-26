@@ -13,12 +13,13 @@ Four evidence domains: target identification & validation, chemical & compound i
 
 ## Human-in-the-loop gates
 
-Four points pause for approval instead of deciding silently (`permissionDecision: "ask"`):
+Five points pause for approval instead of deciding silently (`permissionDecision: "ask"`):
 
 1. New/unlisted source requested during retrieval.
 2. Escalation triggered (`escalation.required: true` being logged).
 3. A triage report filed as final (not `.draft.md`).
 4. An edit to the allowlist, the schema, or a new provider fallback key being stored.
+5. A spec (security review) report filed as final (not `.draft.md`).
 
 ## Delegation
 
@@ -27,6 +28,7 @@ Four points pause for approval instead of deciding silently (`permissionDecision
 | Retrieval, schema, grounding, or API logic | `backend` | Owns `data/schema/response_schema.json` |
 | UI rendering, evidence/confidence/citation display | `frontend` | Never touches backend or data files |
 | "Run triage", "check compliance", "review the audit log" | `p3-triage` | Read-only reviewer |
+| "Security review", "check for vulnerabilities", "is this safe to ship" | `spec` | Read-only reviewer, third agent alongside `backend`/`frontend` |
 | A change that touches the schema **and** its UI | `backend` first, then `frontend` | Sequential — frontend depends on the finalized (and human-approved) schema shape |
 
 ## LLM provider fallback

@@ -8,7 +8,7 @@ no embeddings/vector store yet; see "Deferred for POC scope").
 
 ```
 backend/
-├── requirements.txt      # fastapi, uvicorn, requests, jsonschema, pydantic
+├── requirements.txt      # fastapi, uvicorn, requests, jsonschema, pydantic, pytest, httpx
 ├── src/
 │   ├── utils/
 │   │   └── allowlist.py       # loads data/allowlist/sources.json; is_allowed()/require_allowed() — defense-in-depth, independent of the dev-time PreToolUse hook
@@ -65,6 +65,72 @@ will start working immediately with no code changes.
 By contrast, PubMed/NCBI E-utilities (`www.ncbi.nlm.nih.gov/entrez/eutils/...`,
 verified live), ClinicalTrials.gov API v2 (`clinicaltrials.gov`), and PubChem
 PUG REST (`pubchem.ncbi.nlm.nih.gov`) all match their allowlisted hosts exactly.
+
+## Auth
+
+`POST /query` and `POST /settings/provider-key` both require an API key on
+every request. This is the exact contract the frontend (or any other caller)
+must implement:
+
+- **Header name:** `X-API-Key`
+- **Env var read by the backend:** `AIDLC_API_KEY`
+- **Default value if the env var is unset:** `dev-local-key`
+
+Send the header on every request to either route, e.g.:
+
+```
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: dev-local-key" \
+  -d '{"query": "..."}'
+```
+
+A missing or incorrect `X-API-Key` header gets a `401` with a JSON body
+(`{"detail": "..."}`) naming the header/env var, never a silent pass-through.
+`GET /health` is intentionally left unauthenticated (liveness probe).
+
+The `dev-local-key` default exists so this POC stays demoable with zero
+setup. Any deployment beyond a single developer's own machine **must**
+override it by setting `AIDLC_API_KEY` to a real secret in the process
+environment before starting the server — the default is public (it's
+committed in this file and in `backend/src/api/main.py`).
+
+### Known limitation: this is operator auth, not end-user auth
+
+`X-API-Key` is a **single shared static secret**. It is suitable only for an
+operator-to-operator trust boundary — e.g. a frontend and this backend run
+by the same party, on the same private deployment, separated from the
+public internet by a network boundary (reverse proxy, VPC, etc.).
+
+It does **not** authenticate individual browser end-users. Any secret baked
+into or fetched by the publicly-served frontend JS is necessarily visible to
+every user of that frontend (and to anyone who opens browser devtools) — so
+this key cannot distinguish one end-user from another, cannot be revoked for
+a single misbehaving user without breaking everyone, and must not be treated
+as a substitute for real per-user authentication (e.g. OAuth/OIDC sessions)
+if this app is ever exposed to untrusted end-users directly.
+
+This is a **known, accepted POC limitation**, not an oversight: it is
+documented here explicitly so that promoting this app past a single-operator
+demo deployment requires deliberately replacing this auth model, not
+discovering the gap in production.
+
+### Rate limiting is also a POC limitation
+
+`POST /query` and `POST /settings/provider-key` are protected by a minimal
+in-memory, per-process rate limiter (see `enforce_rate_limit` in
+`backend/src/api/main.py`). It is **not safe for a multi-worker or
+multi-instance deployment** — each process keeps its own independent
+counters, so the effective limit multiplies with the number of
+workers/instances, and counters reset on restart. A real deployment behind
+more than one process needs a shared store (e.g. Redis) instead.
+
+## CORS
+
+Allowed browser origins are read from the comma-separated `AIDLC_CORS_ORIGINS`
+env var (e.g. `AIDLC_CORS_ORIGINS=http://localhost:8080,https://app.example.com`).
+If unset, it defaults to `["http://localhost:8080"]` — scoped to the local
+frontend dev origin, not a wildcard.
 
 ## Contract
 

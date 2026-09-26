@@ -1,12 +1,21 @@
-fastapi
-uvicorn
-requests
-jsonschema
-pydantic
+# Pinned to the exact versions installed in this project's .venv (see
+# `pip freeze`) as of the 2026-09-26 V3 hardening pass (P2-3), so a fresh
+# `pip install -r requirements.txt` reproduces a known-good environment
+# instead of silently picking up whatever is newest at install time.
+fastapi==0.141.1
+uvicorn==0.53.0
+requests==2.34.2
+jsonschema==4.26.0
+pydantic==2.13.5
 
 # Observability (step 15) -- OTel SDK + OTLP/gRPC exporter, exporting to the
 # local SigNoz collector (docker-compose.observability.yml, default
 # http://localhost:4317). See backend/src/observability/otel.py.
-opentelemetry-api
-opentelemetry-sdk
-opentelemetry-exporter-otlp-proto-grpc
+opentelemetry-api==1.44.0
+opentelemetry-sdk==1.44.0
+opentelemetry-exporter-otlp-proto-grpc==1.44.0
+
+# Testing (backend/tests/) -- pytest is the test runner; httpx is required
+# by fastapi.testclient.TestClient (it's built on httpx, not requests).
+pytest==9.1.1
+httpx==0.28.1

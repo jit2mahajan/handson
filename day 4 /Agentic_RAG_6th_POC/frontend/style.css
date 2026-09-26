@@ -327,6 +327,24 @@ button.secondary {
   margin-top: 10px;
 }
 
+/* ---- Query echo (schema field `query`) ---- */
+
+.query-echo {
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+  margin-bottom: 10px;
+}
+
+/* ---- Audit ref footer (schema field `audit_ref`) ---- */
+
+.audit-ref-footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--color-border);
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+}
+
 .raw-response-toggle {
   margin-top: 28px;
   font-size: 0.8rem;
