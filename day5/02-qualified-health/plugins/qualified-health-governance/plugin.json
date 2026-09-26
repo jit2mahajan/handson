@@ -1,0 +1,29 @@
+{
+  "name": "qualified-health-governance",
+  "version": "0.1.0",
+  "description": "Governance layer for the Qualified Health candidate-identification case study: retrieval allowlisting, destructive-bash blocking, format-then-test enforcement, human-in-the-loop edit gating, lifecycle notifications, and the backend/frontend/p3-triage subagents that operate under them.",
+  "skills": ["skills/qualified-health-eligibility-principles"],
+  "agents": ["agents/backend.md", "agents/frontend.md", "agents/p3-triage.md"],
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "WebFetch|Bash|mcp__fetch__fetch", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/check_allowlist_retrieval.py\"" }] },
+      { "matcher": "Bash", "hooks": [
+        { "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/block_destructive_bash.py\"" },
+        { "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/check_tests_before_commit.py\"" }
+      ] },
+      { "matcher": "Write|Edit", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/human_gate.py\"" }] }
+    ],
+    "PostToolUse": [
+      { "matcher": "WebFetch|Bash|mcp__fetch__fetch", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/audit_retrieval_log.py\"" }] },
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/enforce_test_after_format.py\"" }] }
+    ],
+    "Notification": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/lifecycle_notify.py\"" }] }],
+    "SessionStart": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/lifecycle_notify.py\"" }] }],
+    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/lifecycle_notify.py\"" }] }],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/lifecycle_notify.py\"" }] }],
+    "SubagentStop": [{ "hooks": [{ "type": "command", "command": "python3 \"${CLAUDE_PROJECT_DIR}/hooks/lifecycle_notify.py\"" }] }]
+  },
+  "requires": {
+    "data_files": ["data/allowlist/sources.json", "data/schema/response_schema.json"]
+  }
+}

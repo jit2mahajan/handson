@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qualified Health — Coordinator Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">QH</div>
+      <div class="brand-text">
+        <h1>Qualified Health</h1>
+        <p class="tagline">Candidate review &amp; coordinator console <span class="pill pill-muted">synthetic demo data</span></p>
+      </div>
+    </div>
+    <div class="controls">
+      <label class="field-label" for="intervention-select">Intervention</label>
+      <select id="intervention-select">
+        <option value="ckd_stage4_dialysis_referral">CKD Stage 4/5 Dialysis Referral</option>
+        <option value="hfref_advanced_therapy_referral">HFrEF Advanced Therapy Referral</option>
+      </select>
+      <button id="screen-btn" class="btn btn-primary">
+        <span class="btn-icon">▶</span> Run Screening
+      </button>
+      <button id="refresh-btn" class="btn btn-ghost">
+        <span class="btn-icon">↻</span> Refresh
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="column-main">
+      <div class="section-heading">
+        <h2>Candidates</h2>
+        <span id="candidate-count" class="pill pill-muted">0</span>
+      </div>
+      <main id="candidate-list"></main>
+    </section>
+
+    <aside class="column-side">
+      <section class="panel" id="chat-panel">
+        <div class="panel-heading">
+          <h2><span class="panel-icon">💬</span> Ask about these candidates</h2>
+        </div>
+        <p class="panel-hint">Answers are grounded only in the candidates currently on file — every claim cites a patient key.</p>
+        <div class="input-row">
+          <input id="chat-input" type="text" placeholder="e.g. which patients are eligible and why?" />
+          <button id="chat-ask-btn" class="btn btn-primary">Ask</button>
+        </div>
+        <div id="chat-answer" class="answer-box"></div>
+      </section>
+
+      <details class="panel" id="settings-panel">
+        <summary class="panel-heading">
+          <h2><span class="panel-icon">⚙</span> Settings</h2>
+        </summary>
+
+        <div class="settings-block">
+          <label class="field-label" for="groq-key-input">Groq API key</label>
+          <p class="panel-hint">Runtime only — kept in memory, never written to disk, never logged.</p>
+          <div class="input-row">
+            <input id="groq-key-input" type="password" placeholder="gsk_..." />
+            <button id="save-key-btn" class="btn btn-secondary">Save Key</button>
+          </div>
+          <div id="save-key-status" class="status-line"></div>
+        </div>
+
+        <div class="settings-block">
+          <label class="field-label">Load test</label>
+          <p class="panel-hint">Fires concurrent requests at <code>/chat</code> from inside the backend and reports latency.</p>
+          <div class="input-row">
+            <button id="loadtest-btn" class="btn btn-secondary">Run Load Test</button>
+          </div>
+          <div id="loadtest-result" class="status-line"></div>
+        </div>
+      </details>
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

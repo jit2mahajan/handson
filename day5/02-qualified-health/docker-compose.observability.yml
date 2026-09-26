@@ -1,0 +1,214 @@
+# SigNoz self-hosted observability stack (Step 15). Adapted from the sibling
+# day4 project's `docker-compose.observability.yml`, which itself vendors
+# SigNoz Foundry's published reference compose (SigNoz deprecated static
+# compose files as of v0.130.0 — see https://github.com/SigNoz/foundry):
+#   https://github.com/SigNoz/foundry/blob/main/docs/examples/docker/compose/pours/deployment/compose.yaml
+#
+# Changes from the day4 version:
+#   - top-level `name:` is qh-observability (not aidlc-observability), so
+#     containers/volumes don't collide if both projects ever run on the same host.
+#   - SigNoz UI mapped to host 8089 instead of 8080 — this project's own
+#     frontend already owns 8080.
+#   - config paths point at ./observability/signoz/... (this project's own
+#     vendored copy, not a cross-project reference).
+#
+# This stack is entirely separate from docker-compose.yml (own project name,
+# own network) — starting/stopping it never touches the main app stack.
+# The backend only sends telemetry here if OTEL_EXPORTER_OTLP_ENDPOINT is set
+# (see .env.example); unset, it's a no-op and this file doesn't need to run
+# at all for the app to work.
+#
+# Usage:
+#   docker compose -f docker-compose.observability.yml up -d
+#   UI:        http://localhost:8089
+#   OTLP gRPC: localhost:4317 (from the backend container: http://host.docker.internal:4317)
+#   OTLP HTTP: localhost:4318
+#
+# POC-scale, single-node, no-HA — not a production topology.
+
+name: qh-observability
+
+networks:
+  signoz-network:
+    name: signoz-network
+
+services:
+  ingester:
+    command:
+      - -c
+      - |
+        /signoz-otel-collector migrate sync check &&
+        /signoz-otel-collector --config=/etc/otel-collector-config.yaml --manager-config=/etc/opamp-config.yaml --copy-path=/var/tmp/collector-config.yaml
+    deploy:
+      replicas: 1
+    entrypoint:
+      - /bin/sh
+    environment:
+      - SIGNOZ_OTEL_COLLECTOR_CLICKHOUSE_DSN=tcp://signoz-telemetrystore-clickhouse-0-0:9000
+      - SIGNOZ_OTEL_COLLECTOR_TIMEOUT=10m
+    image: signoz/signoz-otel-collector:latest
+    networks:
+      signoz-network:
+        aliases:
+          - signoz-ingester
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    restart: unless-stopped
+    volumes:
+      - ./observability/signoz/ingester/ingester.yaml:/etc/otel-collector-config.yaml:ro
+      - ./observability/signoz/ingester/opamp.yaml:/etc/opamp-config.yaml:ro
+
+  signoz-metastore-postgres-0:
+    container_name: qh-signoz-metastore-postgres-0
+    environment:
+      - POSTGRES_DB=signoz
+      - POSTGRES_PASSWORD=signoz
+      - POSTGRES_USER=signoz
+    healthcheck:
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      test:
+        - CMD-SHELL
+        - pg_isready -U signoz -d signoz
+      timeout: 10s
+    image: postgres:16
+    networks:
+      - signoz-network
+    restart: unless-stopped
+    volumes:
+      - qh-signoz-metastore-postgres-0-data:/var/lib/postgresql/data
+
+  signoz-signoz-0:
+    container_name: qh-signoz-signoz-0
+    environment:
+      - SIGNOZ_SQLSTORE_POSTGRES_DSN=postgres://signoz:signoz@signoz-metastore-postgres-0:5432/signoz?sslmode=disable
+      - SIGNOZ_SQLSTORE_PROVIDER=postgres
+      - SIGNOZ_TELEMETRYSTORE_CLICKHOUSE_DSN=tcp://signoz-telemetrystore-clickhouse-0-0:9000
+      - SIGNOZ_TELEMETRYSTORE_PROVIDER=clickhouse
+    healthcheck:
+      interval: 30s
+      retries: 3
+      start_period: 60s
+      test:
+        - CMD
+        - wget
+        - --spider
+        - -q
+        - http://localhost:8080/api/v1/health
+      timeout: 10s
+    image: signoz/signoz:latest
+    networks:
+      - signoz-network
+    ports:
+      - "8089:8080"
+    restart: unless-stopped
+
+  signoz-telemetrykeeper-clickhousekeeper-0:
+    container_name: qh-signoz-telemetrykeeper-clickhousekeeper-0
+    entrypoint:
+      - /usr/bin/clickhouse-keeper
+      - --config-file=/etc/clickhouse-keeper/keeper.yaml
+    healthcheck:
+      interval: 30s
+      retries: 3
+      start_period: 40s
+      test:
+        - CMD
+        - clickhouse-keeper-client
+        - -h
+        - localhost
+        - -p
+        - "9181"
+        - -q
+        - ls
+      timeout: 10s
+    image: clickhouse/clickhouse-keeper:25.12.5
+    networks:
+      - signoz-network
+    restart: unless-stopped
+    volumes:
+      - qh-signoz-telemetrykeeper-0-data:/var/lib/clickhouse-keeper
+      - ./observability/signoz/telemetrykeeper/clickhousekeeper/keeper-0.yaml:/etc/clickhouse-keeper/keeper.yaml:ro
+
+  signoz-telemetrystore-clickhouse-0-0:
+    container_name: qh-signoz-telemetrystore-clickhouse-0-0
+    depends_on:
+      signoz-telemetrykeeper-clickhousekeeper-0:
+        condition: service_healthy
+      signoz-telemetrystore-clickhouse-user-scripts:
+        condition: service_completed_successfully
+    environment:
+      - CLICKHOUSE_SKIP_USER_SETUP=1
+      - CLICKHOUSE_CONFIG=/etc/clickhouse-server/config-0-0.yaml
+    healthcheck:
+      interval: 30s
+      retries: 3
+      start_period: 40s
+      test:
+        - CMD
+        - wget
+        - --spider
+        - -q
+        - http://localhost:8123/ping
+      timeout: 10s
+    image: clickhouse/clickhouse-server:25.12.5
+    networks:
+      - signoz-network
+    restart: unless-stopped
+    volumes:
+      - qh-signoz-telemetrystore-0-0-data:/var/lib/clickhouse
+      - qh-signoz-telemetrystore-user-scripts:/var/lib/clickhouse/user_scripts:ro
+      - ./observability/signoz/telemetrystore/clickhouse/config-0-0.yaml:/etc/clickhouse-server/config-0-0.yaml:ro
+      - ./observability/signoz/telemetrystore/clickhouse/functions.yaml:/etc/clickhouse-server/functions.yaml:ro
+
+  signoz-telemetrystore-clickhouse-user-scripts:
+    command:
+      - bash
+      - -c
+      - |-
+        version="v0.0.1"
+        node_os=$$(uname -s | tr '[:upper:]' '[:lower:]')
+        node_arch=$$(uname -m | sed s/aarch64/arm64/ | sed s/x86_64/amd64/)
+        echo "Fetching histogram-binary for $${node_os}/$${node_arch}"
+        cd /tmp
+        wget -O histogram-quantile.tar.gz "https://github.com/SigNoz/signoz/releases/download/histogram-quantile%2F$${version}/histogram-quantile_$${node_os}_$${node_arch}.tar.gz"
+        tar -xvzf histogram-quantile.tar.gz
+        mv histogram-quantile /var/lib/clickhouse/user_scripts/histogramQuantile
+    container_name: qh-signoz-telemetrystore-clickhouse-user-scripts
+    image: clickhouse/clickhouse-server:25.12.5
+    networks:
+      - signoz-network
+    restart: on-failure
+    volumes:
+      - qh-signoz-telemetrystore-user-scripts:/var/lib/clickhouse/user_scripts
+
+  signoz-telemetrystore-migrator:
+    command:
+      - -c
+      - |
+        /signoz-otel-collector migrate ready &&
+        /signoz-otel-collector migrate bootstrap &&
+        /signoz-otel-collector migrate sync up &&
+        /signoz-otel-collector migrate async up
+    container_name: qh-signoz-telemetrystore-migrator
+    entrypoint:
+      - /bin/sh
+    environment:
+      - SIGNOZ_OTEL_COLLECTOR_CLICKHOUSE_DSN=tcp://signoz-telemetrystore-clickhouse-0-0:9000
+      - SIGNOZ_OTEL_COLLECTOR_TIMEOUT=10m
+    image: signoz/signoz-otel-collector:latest
+    networks:
+      - signoz-network
+    restart: on-failure
+
+volumes:
+  qh-signoz-metastore-postgres-0-data:
+    name: qh-signoz-metastore-postgres-0-data
+  qh-signoz-telemetrykeeper-0-data:
+    name: qh-signoz-telemetrykeeper-0-data
+  qh-signoz-telemetrystore-0-0-data:
+    name: qh-signoz-telemetrystore-0-0-data
+  qh-signoz-telemetrystore-user-scripts:
+    name: qh-signoz-telemetrystore-user-scripts

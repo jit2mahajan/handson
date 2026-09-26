@@ -1,0 +1,14 @@
+{
+  "fhir_ehr": [
+    "example-ehr.fhir.local"
+  ],
+  "hl7_claims": [
+    "example-claims.local"
+  ],
+  "lab_flatfile": [
+    "example-lab-feed.local"
+  ],
+  "referral_notes": [
+    "example-referral-system.local"
+  ]
+}

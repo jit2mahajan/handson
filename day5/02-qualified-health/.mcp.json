@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "qualified-health": {
+      "command": "python3",
+      "args": ["mcp-servers/qualified-health-mcp/server.py"],
+      "env": {
+        "CLAUDE_PROJECT_DIR": "${CLAUDE_PROJECT_DIR}",
+        "DATABASE_URL": "postgresql://qh:qh@localhost:5432/qualified_health"
+      }
+    }
+  }
+}

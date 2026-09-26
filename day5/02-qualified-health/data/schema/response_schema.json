@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CandidateEvaluationResponse",
+  "type": "object",
+  "required": ["patient_key", "intervention_id", "status", "claims"],
+  "properties": {
+    "patient_key": { "type": "string" },
+    "intervention_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["flagged", "pending_review", "approved", "rejected"]
+    },
+    "score": { "type": "number" },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["evidence_domain", "statement", "source", "snippet"],
+        "properties": {
+          "evidence_domain": {
+            "type": "string",
+            "enum": ["diagnosis_date", "lab_value", "prior_treatment", "note_snippet", "medication"]
+          },
+          "statement": { "type": "string" },
+          "source": { "type": "string" },
+          "snippet": { "type": "string" }
+        }
+      }
+    },
+    "escalation": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" },
+        "reason": { "type": "string" }
+      }
+    }
+  }
+}

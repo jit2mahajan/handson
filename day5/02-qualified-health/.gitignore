@@ -1,0 +1,6 @@
+.env
+logs/*.jsonl
+.claude/audit/*.jsonl
+.claude/audit/*.flag
+__pycache__/
+*.pyc
